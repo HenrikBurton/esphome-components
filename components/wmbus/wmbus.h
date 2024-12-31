@@ -84,7 +84,11 @@ namespace wmbus {
       bool hex_to_bin(const char* src, std::vector<unsigned char> *target);
   };
 
+#ifdef USE_CC1101
   struct Cc1101 {
+#elif defined(USE_SX126X)
+  struct Sx126x {
+#endif
     InternalGPIOPin *mosi{nullptr};
     InternalGPIOPin *miso{nullptr};
     InternalGPIOPin *clk{nullptr};
@@ -108,10 +112,17 @@ namespace wmbus {
       void set_led_pin(GPIOPin *led) { this->led_pin_ = led; }
       void set_led_blink_time(uint32_t led_blink_time) { this->led_blink_time_ = led_blink_time; }
       void register_wmbus_listener(const uint32_t meter_id, const std::string type, const std::string key);
+#ifdef USE_CC1101
       void add_cc1101(InternalGPIOPin *mosi, InternalGPIOPin *miso,
                       InternalGPIOPin *clk, InternalGPIOPin *cs,
                       InternalGPIOPin *gdo0, InternalGPIOPin *gdo2,
                       double frequency, bool sync_mode) {
+#elif defined(USE_SX126X)
+      void add_sx126x(InternalGPIOPin *mosi, InternalGPIOPin *miso,
+                      InternalGPIOPin *clk, InternalGPIOPin *cs,
+                      InternalGPIOPin *gdo0, InternalGPIOPin *gdo2,
+                      double frequency, bool sync_mode) {
+#endif
         this->spi_conf_.mosi = mosi;
         this->spi_conf_.miso = miso;
         this->spi_conf_.clk  = clk;
@@ -167,7 +178,11 @@ namespace wmbus {
       void led_handler();
       HighFrequencyLoopRequester high_freq_;
       GPIOPin *led_pin_{nullptr};
+#ifdef USE_CC1101
       Cc1101 spi_conf_{};
+#elif defined(USE_SX126X)
+      Sx126x spi_conf_{};
+#endif
       double frequency_{};
       bool sync_mode_{false};
       std::map<uint32_t, WMBusListener *> wmbus_listeners_{};

@@ -11,6 +11,8 @@ from esphome.const import (
     CONF_FREQUENCY
 )
 
+CONF_LOG_ALL = "log_all"
+
 CODEOWNERS = ["@HenrikBurton"]
 AUTO_LOAD = [ "sensor","text_sensor"]
 DEPENDANCIES = ["spi"]
@@ -31,6 +33,7 @@ CONFIG_SCHEMA = cv.Schema({
 #    cv.Optional(CONF_GDO0_PIN,       default=5):           pins.internal_gpio_input_pin_schema,
 #    cv.Optional(CONF_GDO2_PIN,       default=4):           pins.internal_gpio_input_pin_schema,
     cv.Optional(CONF_FREQUENCY,      default=868.950):     cv.float_range(min=300, max=928),
+    cv.Optional(CONF_LOG_ALL,        default=False):       cv.boolean,
 }).extend(cv.COMPONENT_SCHEMA)
 
 async def to_code(config):
@@ -39,3 +42,4 @@ async def to_code(config):
     await spi.register_spi_device(var, config)
 
     cg.add(var.set_rf_frequency(config['rf_frequency']))
+    cg.add(var.set_log_all(config[CONF_LOG_ALL]))

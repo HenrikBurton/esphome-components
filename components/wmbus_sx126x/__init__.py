@@ -37,7 +37,7 @@ CONFIG_SCHEMA = cv.Schema({
 
 async def to_code(config):
     var = cg.new_Pvariable(config[CONF_ID])
-    cg.register_component(var, config)
-    spi.register_spi_device(var, config)
+    await cg.register_component(var, config)
+    await spi.register_spi_device(var, config)
 
     cg.add(var.set_rf_frequency(config['rf_frequency']))

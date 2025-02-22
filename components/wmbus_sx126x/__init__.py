@@ -22,7 +22,7 @@ wmbus_sx126x_ns = cg.esphome_ns.namespace("wmbus_sx126x")
 wmbus_sx126x = wmbus_sx126x_ns.class_('wwmbus_sx126x', cg.Component)
 
 CONFIG_SCHEMA = cv.Schema({
-    cv.GenerateID(): cv.declare_id(wmbusSX126X),
+    cv.GenerateID(): cv.declare_id(wmbus_sx126x),
     cv.Optional('name'): cv.string,
 
     cv.Optional(CONF_MOSI_PIN,       default=13):          pins.internal_gpio_output_pin_schema,

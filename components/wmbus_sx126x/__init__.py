@@ -4,6 +4,7 @@ from esphome.components import spi
 from esphome import pins
 from esphome.const import (
     CONF_ID,
+    CONF_SPI_ID,
     CONF_MOSI_PIN,
     CONF_MISO_PIN,
     CONF_CLK_PIN,
@@ -27,6 +28,7 @@ CONFIG_SCHEMA = cv.Schema({
     cv.GenerateID(): cv.declare_id(wmbus_sx126x),
     cv.Optional('name'): cv.string,
 
+    cv.Optional(CONF_SPI_ID,         default='spi'):       pins.internal_gpio_output_pin_schema,
     cv.Optional(CONF_MOSI_PIN,       default=13):          pins.internal_gpio_output_pin_schema,
     cv.Optional(CONF_MISO_PIN,       default=12):          pins.internal_gpio_input_pin_schema,
     cv.Optional(CONF_CLK_PIN,        default=14):          pins.internal_gpio_output_pin_schema,

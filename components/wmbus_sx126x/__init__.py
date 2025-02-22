@@ -35,7 +35,7 @@ CONFIG_SCHEMA = cv.Schema({
     cv.Optional(CONF_BIT_ORDER,      default="msb_first"): cv.enum(ORDERS, lower=True),
 }).extend(cv.COMPONENT_SCHEMA)
 
-def to_code(config):
+async def to_code(config):
     var = cg.new_Pvariable(config[CONF_ID])
     await cg.register_component(var, config)
     await spi.register_spi_device(var, config)

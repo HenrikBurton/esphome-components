@@ -9,7 +9,7 @@ from esphome.const import (
     CONF_CS_PIN,
     CONF_NAME,
     CONF_FREQUENCY,
-    CONF_BIT_ORDER,
+    CONF_BIT_ORDER
 )
 
 CODEOWNERS = ["@HenrikBurton"]

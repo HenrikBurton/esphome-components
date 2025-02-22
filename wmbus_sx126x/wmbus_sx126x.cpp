@@ -1,10 +1,10 @@
-#include "spi_device.h"
+#include "wmbus_sx126x.h"
 #include "esphome/core/log.h"
 #include "esphome/core/hal.h"
 #include <cinttypes>
 
 namespace esphome {
-namespace wmbusSX126X {
+namespace wmbus_sx126x {
 
 static const char *const TAG = "wmbusSX126X";
 
@@ -27,5 +27,5 @@ void wmbusSX126XComponent::dump_config() {
 
 float wmbusSX126XComponent::get_setup_priority() const { return setup_priority::DATA; }
 
-}  // namespace wmbusSX126X
+}  // namespace wmbus_sx126x
 }  // namespace esphome

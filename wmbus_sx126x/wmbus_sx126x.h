@@ -4,10 +4,10 @@
 #include "esphome/components/spi/spi.h"
 
 namespace esphome {
-namespace swmbusSX126X {
+namespace wmbus_sx126x {
 
 class wmbusSX126XComponent : public Component,
-                             public spi::SwmbusSX126X<spi::BIT_ORDER_MSB_FIRST, spi::CLOCK_POLARITY_HIGH,
+                             public spi::wmbusSX126X<spi::BIT_ORDER_MSB_FIRST, spi::CLOCK_POLARITY_HIGH,
                                                  spi::CLOCK_PHASE_TRAILING, spi::DATA_RATE_1MHZ> {
  public:
   void setup() override;
@@ -18,5 +18,5 @@ class wmbusSX126XComponent : public Component,
  protected:
 };
 
-}  // namespace spi_device
+}  // namespace wmbus_sx126x
 }  // namespace esphome

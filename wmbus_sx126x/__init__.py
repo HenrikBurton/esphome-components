@@ -19,7 +19,7 @@ DEPENDANCIES = ["spi"]
 wmbus_sx126x_ns = cg.esphome_ns.namespace("wmbus_sx126x")
 
 # empty_component_ns = cg.esphome_ns.namespace('empty_component')
-wmbus_sx126x = wmbus_sx126x_ns.class_('wmbusSX126X', cg.Component)
+wmbus_sx126x = wmbus_sx126x_ns.class_('wwmbus_sx126x', cg.Component)
 
 CONFIG_SCHEMA = cv.Schema({
     cv.GenerateID(): cv.declare_id(wmbusSX126X),

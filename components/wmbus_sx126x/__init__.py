@@ -8,8 +8,7 @@ from esphome.const import (
     CONF_CLK_PIN,
     CONF_CS_PIN,
     CONF_NAME,
-    CONF_FREQUENCY,
-    CONF_BIT_ORDER
+    CONF_FREQUENCY
 )
 
 CODEOWNERS = ["@HenrikBurton"]
@@ -32,7 +31,6 @@ CONFIG_SCHEMA = cv.Schema({
     cv.Optional(CONF_GDO0_PIN,       default=5):           pins.internal_gpio_input_pin_schema,
     cv.Optional(CONF_GDO2_PIN,       default=4):           pins.internal_gpio_input_pin_schema,
     cv.Optional(CONF_FREQUENCY,      default=868.950):     cv.float_range(min=300, max=928),
-    cv.Optional(CONF_BIT_ORDER,      default="msb_first"): cv.enum(ORDERS, lower=True),
 }).extend(cv.COMPONENT_SCHEMA)
 
 async def to_code(config):

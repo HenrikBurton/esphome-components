@@ -28,8 +28,8 @@ CONFIG_SCHEMA = cv.Schema({
     cv.Optional(CONF_MISO_PIN,       default=12):          pins.internal_gpio_input_pin_schema,
     cv.Optional(CONF_CLK_PIN,        default=14):          pins.internal_gpio_output_pin_schema,
     cv.Optional(CONF_CS_PIN,         default=2):           pins.internal_gpio_output_pin_schema,
-    cv.Optional(CONF_GDO0_PIN,       default=5):           pins.internal_gpio_input_pin_schema,
-    cv.Optional(CONF_GDO2_PIN,       default=4):           pins.internal_gpio_input_pin_schema,
+#    cv.Optional(CONF_GDO0_PIN,       default=5):           pins.internal_gpio_input_pin_schema,
+#    cv.Optional(CONF_GDO2_PIN,       default=4):           pins.internal_gpio_input_pin_schema,
     cv.Optional(CONF_FREQUENCY,      default=868.950):     cv.float_range(min=300, max=928),
 }).extend(cv.COMPONENT_SCHEMA)
 

@@ -31,5 +31,5 @@ async def to_code(config):
     var = cg.new_Pvariable(config[CONF_ID])
     await cg.register_component(var, config)
 
-    cg.add(var.set_rf_frequency(config['rf_frequency']))
+    cg.add(var.set_rf_frequency(config[CONF_FREQUENCY]))
     cg.add(var.set_log_all(config[CONF_LOG_ALL]))

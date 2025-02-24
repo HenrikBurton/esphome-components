@@ -12,6 +12,9 @@ namespace esphome {
                 void setup() override;
                 void dump_config() override;
 
+                void set_rf_frequency (uint32_t rf_frequency) { this->rf_frequency_ = rf_frequency; }
+                void set_log_all(bool log_all) { this->log_all_ = log_all; }
+                
                 float get_setup_priority() const override;
 
             protected:

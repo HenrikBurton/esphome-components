@@ -8,13 +8,13 @@ namespace sx126x_spi {
 
 static const char *const TAG = "sx126x_spi";
 
-void sx126x_spiComponent::setup() {
+void Sx126XSpiComponent::setup() {
   ESP_LOGD(TAG, "Setting up SX126X...");
   this->spi_setup();
   ESP_LOGCONFIG(TAG, "SX1261 started!");
 }
 
-void sx126x_spiComponent::dump_config() {
+void Sx126XSpiComponent::dump_config() {
   ESP_LOGCONFIG(TAG, "SPIDevice");
   LOG_PIN("  CS pin: ", this->cs_);
   ESP_LOGCONFIG(TAG, "  Mode: %d", this->mode_);
@@ -25,7 +25,7 @@ void sx126x_spiComponent::dump_config() {
   }
 }
 
-float sx126x_spiComponent::get_setup_priority() const { return setup_priority::DATA; }
+float Sx126XSpiComponent::get_setup_priority() const { return setup_priority::DATA; }
 
 }  // namespace sx126x_spi
 }  // namespace esphome

@@ -7,7 +7,7 @@ namespace esphome {
 namespace wmbus_sx126x {
 
 class wmbusSX126XComponent : public Component,
-                             public spi::wmbusSX126<spi::BIT_ORDER_MSB_FIRST, spi::CLOCK_POLARITY_HIGH,
+                             public spi::wmbusSX126x <spi::BIT_ORDER_MSB_FIRST, spi::CLOCK_POLARITY_HIGH,
                                                  spi::CLOCK_PHASE_TRAILING, spi::DATA_RATE_1MHZ> {
  public:
   void setup() override;

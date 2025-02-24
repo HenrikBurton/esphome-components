@@ -6,7 +6,7 @@
 namespace esphome {
     namespace sx126x_spi {
 
-        static const char *const TAG = "sx126x_spi123";
+        static const char *const TAG = "sx126x_spi";
 
         void Sx126XSpiComponent::setup() {
             ESP_LOGD(TAG, "Setting up SX126X...");

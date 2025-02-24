@@ -4,10 +4,11 @@ from esphome.components import spi
 from esphome import pins
 from esphome.const import (
     CONF_ID,
-    CONF_NAME,
-    CONF_FREQUENCY
+    CONF_NAME
 )
 
+
+CONF_RF_FREQUENCY = "rf_frequency"
 CONF_LOG_ALL = "log_all"
 
 CODEOWNERS = ["@HenrikBurton"]
@@ -23,7 +24,7 @@ CONFIG_SCHEMA = cv.Schema({
     cv.GenerateID():                                       cv.declare_id(SX126XSPI),
     cv.Optional('name'):                                   cv.string,
 
-    cv.Optional(CONF_FREQUENCY,      default=868.950):     cv.float_range(min=300, max=928),
+    cv.Optional(CONF_RF_FREQUENCY,   default=868.950):     cv.float_range(min=300, max=928),
     cv.Optional(CONF_LOG_ALL,        default=False):       cv.boolean,
 }).extend(cv.COMPONENT_SCHEMA)
 
@@ -31,5 +32,5 @@ async def to_code(config):
     var = cg.new_Pvariable(config[CONF_ID])
     await cg.register_component(var, config)
 
-    cg.add(var.set_rf_frequency(config[CONF_FREQUENCY]))
+    cg.add(var.set_rf_frequency(config[CONF_RF_FREQUENCY]))
     cg.add(var.set_log_all(config[CONF_LOG_ALL]))

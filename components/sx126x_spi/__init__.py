@@ -17,11 +17,11 @@ DEPENDANCIES = ["spi"]
 sx126x_spi_ns = cg.esphome_ns.namespace("sx126x_spi")
 
 # empty_component_ns = cg.esphome_ns.namespace('empty_component')
-Sx126XSpiComponent = sx126x_spi_ns.class_('Sx126XSpi', cg.Component)
+Sx126XSpiComponent = sx126x_spi_ns.class_("Sx126XSpi")
 
 CONFIG_SCHEMA = cv.Schema({
-    cv.GenerateID(): cv.declare_id(Sx126XSpiComponent),
-    cv.Optional('name'): cv.string,
+    cv.GenerateID():                                       cv.declare_id(Sx126XSpiComponent),
+    cv.Optional('name'):                                   cv.string,
 
     cv.Optional(CONF_FREQUENCY,      default=868.950):     cv.float_range(min=300, max=928),
     cv.Optional(CONF_LOG_ALL,        default=False):       cv.boolean,

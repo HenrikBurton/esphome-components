@@ -20,7 +20,7 @@ sx126x_spi_ns = cg.esphome_ns.namespace("sx126x_spi")
 Sx126XSpiComponent = sx126x_spi_ns.class_('sx126x_spi', cg.Component)
 
 CONFIG_SCHEMA = cv.Schema({
-    cv.GenerateID(): cv.declare_id(sx126x_spi),
+    cv.GenerateID(): cv.declare_id(Sx126XSpiComponent),
     cv.Optional('name'): cv.string,
 
     cv.Optional(CONF_FREQUENCY,      default=868.950):     cv.float_range(min=300, max=928),

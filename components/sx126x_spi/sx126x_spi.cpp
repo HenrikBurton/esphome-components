@@ -18,6 +18,7 @@ namespace esphome {
             this->led_handler();
 
             if ((millis() - this->led_on_millis_) >= 1000) {
+                ESP_LOGD(TAG, "Blink!");
                 this->led_blink();
             }
         }

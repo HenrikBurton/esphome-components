@@ -25,7 +25,7 @@ namespace esphome {
             }
         }
 
-        float Sx126XSpiComponent::get_setup_priority() const { return setup_priority::DATA; }
+//        float Sx126XSpiComponent::get_setup_priority() const { return setup_priority::DATA; }
 
     }  // namespace sx126x_spi
 }  // namespace esphome

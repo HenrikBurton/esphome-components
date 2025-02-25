@@ -18,6 +18,8 @@ namespace esphome {
                 float get_setup_priority() const override;
 
             protected:
+                uint32_t rf_frequency_;
+                bool log_all_;
         };
 
     }  // namespace sx126x_spi

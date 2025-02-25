@@ -19,6 +19,9 @@ namespace esphome {
                 
                 float get_setup_priority() const override;
 
+                void set_led_pin(GPIOPin *led) { this->led_pin_ = led; }
+                void set_led_blink_time(uint32_t led_blink_time) { this->led_blink_time_ = led_blink_time; }
+
             protected:
                 float rf_frequency_;
                 bool log_all_;

@@ -14,6 +14,14 @@ namespace esphome {
             ESP_LOGCONFIG(TAG, "SX1261 started!");
         }
 
+        void Sx126XSpiComponent::loop() {
+            this->led_handler();
+
+            if ((millis() - this->led_on_millis_) >= 1000) {
+                this->led_blink();
+            }
+        }
+
         void Sx126XSpiComponent::dump_config() {
             ESP_LOGCONFIG(TAG, "sx126x device");
             ESP_LOGCONFIG(TAG, "  frequency: %f", this->rf_frequency_);
@@ -33,6 +41,27 @@ namespace esphome {
         }
 
         float Sx126XSpiComponent::get_setup_priority() const { return setup_priority::DATA; }
+
+        void Sx126XSpiComponent::led_blink() {
+            if (this->led_pin_ != nullptr) {
+              if (!this->led_on_) {
+                this->led_on_millis_ = millis();
+                this->led_pin_->digital_write(true);
+                this->led_on_ = true;
+              }
+            }
+          }
+        
+          void Sx126XSpiComponent::led_handler() {
+            if (this->led_pin_ != nullptr) {
+              if (this->led_on_) {
+                if ((millis() - this->led_on_millis_) >= this->led_blink_time_) {
+                  this->led_pin_->digital_write(false);
+                  this->led_on_ = false;
+                }
+              }
+            }
+          }
 
     }  // namespace sx126x_spi
 }  // namespace esphome

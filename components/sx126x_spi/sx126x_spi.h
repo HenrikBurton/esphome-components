@@ -26,7 +26,9 @@ namespace esphome {
                 float rf_frequency_;
                 bool log_all_;
                 GPIOPin *led_pin_{nullptr};
-                uint32_t led_blink_time_;
+                uint32_t led_blink_time_{0};
+                uint32_t led_on_millis_{0};
+                bool led_on_{false};
         };
 
     }  // namespace sx126x_spi

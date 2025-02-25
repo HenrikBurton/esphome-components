@@ -12,6 +12,7 @@ namespace esphome {
 
             public:
                 void setup() override;
+                void loop() override;
                 void dump_config() override;
 
                 void set_rf_frequency (float rf_frequency) { this->rf_frequency_ = rf_frequency; }

@@ -18,7 +18,7 @@ namespace esphome {
                 float get_setup_priority() const override;
 
             protected:
-                const float rf_frequency_;
+                float rf_frequency_;
                 bool log_all_;
         };
 

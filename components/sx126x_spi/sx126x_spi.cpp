@@ -12,6 +12,12 @@ namespace esphome {
             ESP_LOGD(TAG, "Setting up SX126X...");
 //            this->spi_setup();
             ESP_LOGCONFIG(TAG, "SX1261 started!");
+
+            if (this->led_pin_ != nullptr) {
+                this->led_pin_->setup();
+                this->led_pin_->digital_write(false);
+                this->led_on_ = false;
+            }
         }
 
         void Sx126XSpiComponent::loop() {

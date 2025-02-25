@@ -16,7 +16,7 @@ namespace esphome {
 
         void Sx126XSpiComponent::dump_config() {
             ESP_LOGCONFIG(TAG, "sx126x device");
-            ESP_LOGCONFIG("  frequency: ", this->rf_frequency_);
+            ESP_LOGCONFIG(TAG, "  frequency: %f", this->rf_frequency_);
 //            ESP_LOGCONFIG(TAG, "  Mode: %d", this->mode_);
 //            if (this->data_rate_ < 1000000) {
 //                ESP_LOGCONFIG(TAG, "  Data rate: %" PRId32 "kHz", this->data_rate_ / 1000);

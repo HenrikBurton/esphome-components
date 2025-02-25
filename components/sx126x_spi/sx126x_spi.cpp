@@ -22,7 +22,7 @@ namespace esphome {
 //                ESP_LOGCONFIG(TAG, "  Data rate: %" PRId32 "kHz", this->data_rate_ / 1000);
 //            } else {
 //                ESP_LOGCONFIG(TAG, "  Data rate: %" PRId32 "MHz", this->data_rate_ / 1000000);
-            }
+//            }
         }
 
 //        float Sx126XSpiComponent::get_setup_priority() const { return setup_priority::DATA; }

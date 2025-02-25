@@ -23,6 +23,13 @@ namespace esphome {
 //            } else {
 //                ESP_LOGCONFIG(TAG, "  Data rate: %" PRId32 "MHz", this->data_rate_ / 1000000);
 //            }
+            if (this->led_pin_ != nullptr) {
+                ESP_LOGCONFIG(TAG, "  LED:");
+                LOG_PIN("    Pin: ", this->led_pin_);
+                ESP_LOGCONFIG(TAG, "    Duration: %d ms", this->led_blink_time_);
+            } else {
+                ESP_LOGCONFIG(TAG, "   No LED");
+            }
         }
 
         float Sx126XSpiComponent::get_setup_priority() const { return setup_priority::DATA; }

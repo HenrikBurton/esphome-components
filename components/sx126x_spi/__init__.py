@@ -4,7 +4,8 @@ from esphome.components import spi
 from esphome import pins
 from esphome.const import (
     CONF_ID,
-    CONF_NAME
+    CONF_NAME,
+    CONF_BUSY_PIN
 )
 
 
@@ -27,6 +28,7 @@ CONFIG_SCHEMA = cv.Schema({
     cv.Optional('name'):                                   cv.string,
 
     cv.Optional(CONF_RF_FREQUENCY,   default=868.950):     cv.float_range(min=300, max=928),
+    cv.Optional(CONF_BUSY_PIN):                            pins.gpio_output_pin_schema,
     cv.Optional(CONF_LOG_ALL,        default=False):       cv.boolean,
 
     cv.Optional(CONF_LED_PIN):                             pins.gpio_output_pin_schema,
@@ -36,6 +38,7 @@ CONFIG_SCHEMA = cv.Schema({
 async def to_code(config):
     var = cg.new_Pvariable(config[CONF_ID])
     await cg.register_component(var, config)
+    await spi.register_spi_device(var, config)
 
     cg.add(var.set_rf_frequency(config[CONF_RF_FREQUENCY]))
     cg.add(var.set_log_all(config[CONF_LOG_ALL]))

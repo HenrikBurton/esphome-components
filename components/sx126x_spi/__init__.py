@@ -43,6 +43,10 @@ async def to_code(config):
     cg.add(var.set_rf_frequency(config[CONF_RF_FREQUENCY]))
     cg.add(var.set_log_all(config[CONF_LOG_ALL]))
 
+    if CONF_BUSY_PIN in config:
+        busy_pin = await cg.gpio_pin_expression(config[CONF_BUSY_PIN])
+        cg.add(var.set_busy_pin(busy_pin))
+
     if CONF_LED_PIN in config:
         led_pin = await cg.gpio_pin_expression(config[CONF_LED_PIN])
         cg.add(var.set_led_pin(led_pin))

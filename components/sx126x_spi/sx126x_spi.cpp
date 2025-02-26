@@ -25,17 +25,17 @@ namespace esphome {
 
             if ((millis() - this->led_on_millis_) >= 1000) {
                 ESP_LOGD(TAG, "Read status");
-                uint8_t value = 0;
-                this->enable();
-                this->write_byte(0xC0);
-                this->write_byte(0x00);
-                value = this->read_byte();
-                // According to datsheet, the chip select must be written HIGH, LOW, HIGH
-                // to correctly end the READ command.
-                this->cs_->digital_write(true);
-                this->cs_->digital_write(false);
-                this->disable();
-                ESP_LOGV(TAG, "read_register_: %d", value);
+//                uint8_t value = 0;
+//                this->enable();
+//                this->write_byte(0xC0);
+//                this->write_byte(0x00);
+//                value = this->read_byte();
+//                // According to datsheet, the chip select must be written HIGH, LOW, HIGH
+//                // to correctly end the READ command.
+//                this->cs_->digital_write(true);
+//                this->cs_->digital_write(false);
+//                this->disable();
+//                ESP_LOGV(TAG, "read_register_: %d", value);
 
 //                ESP_LOGD(TAG, "Blink!");
                 this->led_blink();

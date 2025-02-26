@@ -33,7 +33,7 @@ CONFIG_SCHEMA = cv.Schema({
 
     cv.Optional(CONF_LED_PIN):                             pins.gpio_output_pin_schema,
     cv.Optional(CONF_LED_BLINK_TIME, default="200ms"):     cv.positive_time_period,
-}).extend(cv.COMPONENT_SCHEMA)
+}).extend(cv.COMPONENT_SCHEMA),
   .extend(spi.spi_device_schema(cs_pin_required=True))
 
 async def to_code(config):

@@ -54,6 +54,13 @@ namespace esphome {
                 ESP_LOGCONFIG(TAG, "   No LED");
             }
 
+            if (this->cs_pin_ != nullptr) {
+                ESP_LOGCONFIG(TAG, "  CS:");
+                LOG_PIN("    Pin: ", this->cs_pin_);
+            } else {
+                ESP_LOGCONFIG(TAG, "   No CS pin");
+            }
+            
             if (this->busy_pin_ != nullptr) {
                 ESP_LOGCONFIG(TAG, "  BUSY:");
                 LOG_PIN("    Pin: ", this->busy_pin_);

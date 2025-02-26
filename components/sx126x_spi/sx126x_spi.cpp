@@ -24,7 +24,7 @@ namespace esphome {
             this->led_handler();
 
             if ((millis() - this->led_on_millis_) >= 1000) {
-                ESP_LOGD(TAG, "Read status");
+//                ESP_LOGD(TAG, "Read status");
 //                uint8_t value = 0;
 //                this->enable();
 //                this->write_byte(0xC0);
@@ -53,7 +53,7 @@ namespace esphome {
             } else {
                 ESP_LOGCONFIG(TAG, "   No LED");
             }
-            
+
             if (this->busy_pin_ != nullptr) {
                 ESP_LOGCONFIG(TAG, "  BUSY:");
                 LOG_PIN("    Pin: ", this->busy_pin_);

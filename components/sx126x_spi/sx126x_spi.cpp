@@ -15,7 +15,7 @@ namespace esphome {
 
             if (this->busy_pin_ != nullptr) {
                 this->busy_pin_->setup();
-                ESP_LOGD(TAG, "BUSY pin setup!")
+                ESP_LOGD(TAG, "BUSY pin setup!");
             }
 
             if (this->led_pin_ != nullptr) {

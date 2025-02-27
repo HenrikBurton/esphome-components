@@ -11,7 +11,7 @@ namespace esphome {
         void Sx126XSpiComponent::setup() {
             ESP_LOGD(TAG, "Setting up SPI interface to SX126X...");
             this->spi_setup();
-            ESP_LOGCONFIG(TAG, "SPI interface setup!");
+            ESP_LOGD(TAG, "SPI interface setup!");
 
             if (this->busy_pin_ != nullptr) {
                 this->busy_pin_->setup();
@@ -30,18 +30,18 @@ namespace esphome {
             this->led_handler();
 
             if ((millis() - this->led_on_millis_) >= 1000) {
-//                ESP_LOGD(TAG, "Read status");
-//                uint8_t value = 0;
-//                this->enable();
-//                this->write_byte(0xC0);
-//                this->write_byte(0x00);
-//                value = this->read_byte();
-//                // According to datsheet, the chip select must be written HIGH, LOW, HIGH
-//                // to correctly end the READ command.
-//                this->cs_->digital_write(true);
-//                this->cs_->digital_write(false);
-//                this->disable();
-//                ESP_LOGV(TAG, "read_register_: %d", value);
+                ESP_LOGD(TAG, "Read status");
+                uint8_t value = 0;
+                this->enable();
+                this->write_byte(0xC0);
+                this->write_byte(0x00);
+                value = this->read_byte();
+                // According to datsheet, the chip select must be written HIGH, LOW, HIGH
+                // to correctly end the READ command.
+                this->cs_->digital_write(true);
+                this->cs_->digital_write(false);
+                this->disable();
+                ESP_LOGD(TAG, "read_register_: %d", value);
 
                 ESP_LOGD(TAG, "Blink!");
                 this->led_blink();

@@ -9,14 +9,15 @@ namespace esphome {
         static const char *const TAG = "sx126x_spi";
 
         void Sx126XSpiComponent::setup() {
-            ESP_LOGD(TAG, "Setting up SPI interface to SX126X...");
-            this->spi_setup();
-            ESP_LOGD(TAG, "SPI interface setup!");
-
             if (this->cs_pin_ != nullptr) {
                 this->cs_pin_->setup();
                 ESP_LOGD(TAG, "CS pin setup!");
             }
+
+            ESP_LOGD(TAG, "Setting up SPI interface to SX126X...");
+            this->spi_setup();
+            ESP_LOGD(TAG, "SPI interface setup!");
+            
             if (this->busy_pin_ != nullptr) {
                 this->busy_pin_->setup();
                 ESP_LOGD(TAG, "BUSY pin setup!");

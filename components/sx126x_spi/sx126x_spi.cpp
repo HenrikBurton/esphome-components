@@ -22,6 +22,7 @@ namespace esphome {
                 this->led_pin_->setup();
                 this->led_pin_->digital_write(false);
                 this->led_on_ = false;
+                ESP_LOGD(TAG, "LED pin setup!");
             }
         }
 

@@ -13,6 +13,10 @@ namespace esphome {
             this->spi_setup();
             ESP_LOGD(TAG, "SPI interface setup!");
 
+            if (this->cs_pin__pin_ != nullptr) {
+                this->cs_pin__pin_->setup();
+                ESP_LOGD(TAG, "CS pin setup!");
+            }
             if (this->busy_pin_ != nullptr) {
                 this->busy_pin_->setup();
                 ESP_LOGD(TAG, "BUSY pin setup!");
@@ -47,7 +51,7 @@ namespace esphome {
                 //this->disable();
                 //ESP_LOGD(TAG, "read_register_: %d", value);
             }
-            
+
             if (this->led_on_) {
                 this->cs_pin_->digital_write(true);
             } else {

@@ -28,7 +28,7 @@ CONFIG_SCHEMA = cv.Schema({
     cv.Optional('name'):                                   cv.string,
 
     cv.Optional(CONF_RF_FREQUENCY,   default=868.950):     cv.float_range(min=300, max=928),
-    cv.Optional(CONF_BUSY_PIN):                            pins.gpio_output_pin_schema,
+    cv.Optional(CONF_BUSY_PIN):                            pins.gpio_input_pin_schema,
     cv.Optional(CONF_LOG_ALL,        default=False):       cv.boolean,
 
     cv.Optional(CONF_LED_PIN):                             pins.gpio_output_pin_schema,

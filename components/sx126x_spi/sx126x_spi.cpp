@@ -13,7 +13,7 @@ namespace esphome {
             this->spi_setup();
             ESP_LOGCONFIG(TAG, "SPI interface setup!");
 
-            if (this->busy_pin__pin_ != nullptr) {
+            if (this->busy_pin_ != nullptr) {
                 this->busy_pin_->setup();
                 ESP_LOGD(TAG, "BUSY pin setup!")
             }

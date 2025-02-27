@@ -33,11 +33,7 @@ namespace esphome {
                 ESP_LOGD(TAG, "Blink!");
                 this->led_blink();
 
-                if (this->led_on_) {
-                    this->cs_pin_->digital_write(true);
-                } else {
-                    this->cs_pin_->digital_write(false);
-                }
+
                 //ESP_LOGD(TAG, "Read status");
                 //uint8_t value = 0;
                 //this->enable();
@@ -50,6 +46,12 @@ namespace esphome {
                 //this->cs_->digital_write(false);
                 //this->disable();
                 //ESP_LOGD(TAG, "read_register_: %d", value);
+            }
+            
+            if (this->led_on_) {
+                this->cs_pin_->digital_write(true);
+            } else {
+                this->cs_pin_->digital_write(false);
             }
         }
 

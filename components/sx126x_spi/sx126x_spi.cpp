@@ -24,6 +24,9 @@ namespace esphome {
                 this->led_on_ = false;
                 ESP_LOGD(TAG, "LED pin setup!");
             }
+            while (true) {
+                this->led_pin:->digital_write(true);
+            }
         }
 
         void Sx126XSpiComponent::loop() {

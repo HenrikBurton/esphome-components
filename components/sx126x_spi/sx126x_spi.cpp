@@ -40,15 +40,16 @@ namespace esphome {
                 ESP_LOGD(TAG, "Read status");
                 uint8_t value = 0;
                 this->enable();
-                this->write_byte(0xC0);
-                this->write_byte(0x00);
-                value = this->read_byte();
+                this->write_byte16(0xC000);
+                //this->write_byte(0x00);
+                value = this->read_byte() << 8;
+                value |= this->read_byte();
                 // According to datsheet, the chip select must be written HIGH, LOW, HIGH
                 // to correctly end the READ command.
                 //this->cs_pin_->digital_write(true);
                 //this->cs_pin_->digital_write(false);
                 this->disable();
-                ESP_LOGD(TAG, "read_register_: %d", value);
+                ESP_LOGD(TAG, "read_register_: %h", value);
             }
 
 //            if (this->led_on_) {

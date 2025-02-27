@@ -37,26 +37,25 @@ namespace esphome {
                 ESP_LOGD(TAG, "Blink!");
                 this->led_blink();
 
-
-                //ESP_LOGD(TAG, "Read status");
-                //uint8_t value = 0;
-                //this->enable();
-                //this->write_byte(0xC0);
-                //this->write_byte(0x00);
-                //value = this->read_byte();
+                ESP_LOGD(TAG, "Read status");
+                uint8_t value = 0;
+                this->enable();
+                this->write_byte(0xC0);
+                this->write_byte(0x00);
+                value = this->read_byte();
                 // According to datsheet, the chip select must be written HIGH, LOW, HIGH
                 // to correctly end the READ command.
-                //this->cs_->digital_write(true);
-                //this->cs_->digital_write(false);
-                //this->disable();
-                //ESP_LOGD(TAG, "read_register_: %d", value);
+                this->cs_pin_->digital_write(true);
+                this->cs_pin_->digital_write(false);
+                this->disable();
+                ESP_LOGD(TAG, "read_register_: %d", value);
             }
 
-            if (this->led_on_) {
-                this->cs_pin_->digital_write(true);
-            } else {
-                this->cs_pin_->digital_write(false);
-            }
+//            if (this->led_on_) {
+//                this->cs_pin_->digital_write(true);
+//            } else {
+//                this->cs_pin_->digital_write(false);
+//            }
         }
 
         void Sx126XSpiComponent::dump_config() {

@@ -43,7 +43,7 @@ namespace esphome {
 //                this->disable();
 //                ESP_LOGV(TAG, "read_register_: %d", value);
 
-//                ESP_LOGD(TAG, "Blink!");
+                ESP_LOGD(TAG, "Blink!");
                 this->led_blink();
             }
         }

@@ -45,8 +45,8 @@ namespace esphome {
                 value = this->read_byte();
                 // According to datsheet, the chip select must be written HIGH, LOW, HIGH
                 // to correctly end the READ command.
-                this->cs_pin_->digital_write(true);
-                this->cs_pin_->digital_write(false);
+                //this->cs_pin_->digital_write(true);
+                //this->cs_pin_->digital_write(false);
                 this->disable();
                 ESP_LOGD(TAG, "read_register_: %d", value);
             }

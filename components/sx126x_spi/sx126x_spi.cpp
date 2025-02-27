@@ -34,9 +34,9 @@ namespace esphome {
                 this->led_blink();
 
                 if (this->led_on_) {
-                    this->cs_pin_digital_write(true);
+                    this->cs_pin_->digital_write(true);
                 } else {
-                    this->cs_pin_digital_write(false);
+                    this->cs_pin_->digital_write(false);
                 }
                 //ESP_LOGD(TAG, "Read status");
                 //uint8_t value = 0;

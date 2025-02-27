@@ -30,6 +30,9 @@ namespace esphome {
             this->led_handler();
 
             if ((millis() - this->led_on_millis_) >= 1000) {
+                ESP_LOGD(TAG, "Blink!");
+                this->led_blink();
+                
                 ESP_LOGD(TAG, "Read status");
                 uint8_t value = 0;
                 this->enable();
@@ -42,9 +45,6 @@ namespace esphome {
                 this->cs_->digital_write(false);
                 this->disable();
                 ESP_LOGD(TAG, "read_register_: %d", value);
-
-                ESP_LOGD(TAG, "Blink!");
-                this->led_blink();
             }
         }
 

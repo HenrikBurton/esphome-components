@@ -21,20 +21,22 @@ DEPENDANCIES = ["spi"]
 sx126x_spi_ns = cg.esphome_ns.namespace("sx126x_spi")
 
 # empty_component_ns = cg.esphome_ns.namespace('empty_component')
-SX126XSPI = sx126x_spi_ns.class_("Sx126XSpiComponent", cg.Component)
+SX126XSPI = sx126x_spi_ns.class_("Sx126XSpiComponent", cg.Component, spi.SPIDevice)
 
-CONFIG_SCHEMA = cv.Schema({
-    cv.GenerateID():                                       cv.declare_id(SX126XSPI),
-    cv.Optional('name'):                                   cv.string,
+CONFIG_SCHEMA = (
+    cv.Schema({
+        cv.GenerateID():                                       cv.declare_id(SX126XSPI),
+        cv.Optional('name'):                                   cv.string,
 
-    cv.Optional(CONF_RF_FREQUENCY,   default=868.950):     cv.float_range(min=300, max=928),
-    cv.Optional(CONF_BUSY_PIN):                            pins.gpio_input_pin_schema,
-    cv.Optional(CONF_LOG_ALL,        default=False):       cv.boolean,
+        cv.Optional(CONF_RF_FREQUENCY,   default=868.950):     cv.float_range(min=300, max=928),
+        cv.Optional(CONF_BUSY_PIN):                            pins.gpio_input_pin_schema,
+        cv.Optional(CONF_LOG_ALL,        default=False):       cv.boolean,
 
-    cv.Optional(CONF_LED_PIN):                             pins.gpio_output_pin_schema,
-    cv.Optional(CONF_LED_BLINK_TIME, default="200ms"):     cv.positive_time_period,
-#}).extend(cv.COMPONENT_SCHEMA)
-}).extend(spi.spi_device_schema(cs_pin_required=True))
+        cv.Optional(CONF_LED_PIN):                             pins.gpio_output_pin_schema,
+        cv.Optional(CONF_LED_BLINK_TIME, default="200ms"):     cv.positive_time_period,
+    }).extend(cv.COMPONENT_SCHEMA)
+      .extend(spi.spi_device_schema(cs_pin_required=True))
+)
 
 async def to_code(config):
     var = cg.new_Pvariable(config[CONF_ID])

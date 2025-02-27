@@ -25,7 +25,7 @@ namespace esphome {
                 ESP_LOGD(TAG, "LED pin setup!");
             }
             while (true) {
-                this->led_pin:->digital_write(true);
+                this->led_pin_->digital_write(true);
             }
         }
 

@@ -11,6 +11,7 @@ namespace esphome {
         void Sx126XSpiComponent::setup() {
             if (this->cs_pin_ != nullptr) {
                 this->cs_pin_->setup();
+                this->cs_pin_->digital_write(true);
                 ESP_LOGD(TAG, "CS pin setup!");
             }
 

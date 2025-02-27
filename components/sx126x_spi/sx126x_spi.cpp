@@ -41,7 +41,7 @@ namespace esphome {
 
                 ESP_LOGD(TAG, "Read status");
                 uint8_t value = 0;
-                enable();
+                this->cs_pin_->digital_write(false); //enable();
                 this->write_byte16(0xC000);
                 //this->write_byte(0x00);
                 value = this->read_byte() << 8;
@@ -50,7 +50,7 @@ namespace esphome {
                 // to correctly end the READ command.
                 //this->cs_pin_->digital_write(true);
                 //this->cs_pin_->digital_write(false);
-                this->disable();
+                this->cs_pin_->digital_write(true); //this->disable();
                 ESP_LOGD(TAG, "read_register_: %d", value);
             }
 

@@ -17,7 +17,7 @@ namespace esphome {
             ESP_LOGD(TAG, "Setting up SPI interface to SX126X...");
             this->spi_setup();
             ESP_LOGD(TAG, "SPI interface setup!");
-            
+
             if (this->busy_pin_ != nullptr) {
                 this->busy_pin_->setup();
                 ESP_LOGD(TAG, "BUSY pin setup!");
@@ -40,7 +40,7 @@ namespace esphome {
 
                 ESP_LOGD(TAG, "Read status");
                 uint8_t value = 0;
-                this->begin_transaction(); //enable();
+                enable();
                 this->write_byte16(0xC000);
                 //this->write_byte(0x00);
                 value = this->read_byte() << 8;
@@ -49,7 +49,7 @@ namespace esphome {
                 // to correctly end the READ command.
                 //this->cs_pin_->digital_write(true);
                 //this->cs_pin_->digital_write(false);
-                this->end_transaction(); //this->disable();
+                this->disable();
                 ESP_LOGD(TAG, "read_register_: %d", value);
             }
 

@@ -13,8 +13,8 @@ namespace esphome {
             this->spi_setup();
             ESP_LOGD(TAG, "SPI interface setup!");
 
-            if (this->cs_pin__pin_ != nullptr) {
-                this->cs_pin__pin_->setup();
+            if (this->cs_pin_ != nullptr) {
+                this->cs_pin_->setup();
                 ESP_LOGD(TAG, "CS pin setup!");
             }
             if (this->busy_pin_ != nullptr) {

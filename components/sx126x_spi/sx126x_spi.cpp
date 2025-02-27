@@ -49,7 +49,7 @@ namespace esphome {
                 //this->cs_pin_->digital_write(true);
                 //this->cs_pin_->digital_write(false);
                 this->disable();
-                ESP_LOGD(TAG, "read_register_: %h", value);
+                ESP_LOGD(TAG, "read_register_: %d", value);
             }
 
 //            if (this->led_on_) {

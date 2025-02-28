@@ -40,12 +40,13 @@ namespace esphome {
                 uint8_t value = 0;
                 SPIDevice::enable();
                 uint8_t command[] = {0xC0, 0x00};
-                SPIDevice::transfer(command, &this->rx_buffer, sizeof(command));
+                SPIDevice::write_array(command, &this->rx_buffer, sizeof(command));
                 //SPIDevice::write_byte16(0xC000);
-                value = SPIDevice::read_byte() << 8;
-                value |= SPIDevice::read_byte();
+                //value = SPIDevice::read_byte() << 8;
+                //value |= SPIDevice::read_byte();
+                SPIDevice::read_array(&this->rx_buffer, sizeof(command));
                 SPIDevice::disable();
-                //value = this->rx_buffer[0] << 8 | this->rx_buffer[1];
+                value = this->rx_buffer[0] << 8 | this->rx_buffer[1];
                 ESP_LOGD(TAG, "read_register_: %d", value);
             }
 

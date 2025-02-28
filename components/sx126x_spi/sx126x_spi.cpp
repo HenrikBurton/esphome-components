@@ -9,12 +9,6 @@ namespace esphome {
         static const char *const TAG = "sx126x_spi";
 
         void Sx126XSpiComponent::setup() {
-            if (this->cs_pin_ != nullptr) {
-                this->cs_pin_->setup();
-                this->cs_pin_->digital_write(true);
-                ESP_LOGD(TAG, "CS pin setup!");
-            }
-
             ESP_LOGD(TAG, "Setting up SPI interface to SX126X...");
             this->spi_setup();
             ESP_LOGD(TAG, "SPI interface setup!");
@@ -44,14 +38,12 @@ namespace esphome {
 
                 ESP_LOGD(TAG, "Read status");
                 uint8_t value = 0;
-                //this->cs_pin_->digital_write(false);
                 SPIDevice::enable();
                 uint8_t command[] = {0xC0, 0x00};
                 //SPIDevice::this->transfer_array(&command, sizeof(command));
                 SPIDevice::write_byte16(0xC000);
                 value = SPIDevice::read_byte() << 8;
                 value |= SPIDevice::read_byte();
-                //this->cs_pin_->digital_write(true);
                 SPIDevice::disable();
                 //value = this->rx_buffer[0] << 8 | this->rx_buffer[1];
                 ESP_LOGD(TAG, "read_register_: %d", value);
@@ -65,6 +57,8 @@ namespace esphome {
         }
 
         void Sx126XSpiComponent::dump_config() {
+            SPIDevice::dump_config();
+
             ESP_LOGCONFIG(TAG, "sx126x device");
             ESP_LOGCONFIG(TAG, "  radio frequency: %f", this->rf_frequency_);
 
@@ -76,13 +70,6 @@ namespace esphome {
                 ESP_LOGCONFIG(TAG, "   No LED");
             }
 
-            if (this->cs_pin_ != nullptr) {
-                ESP_LOGCONFIG(TAG, "  CS:");
-                LOG_PIN("    Pin: ", this->cs_pin_);
-            } else {
-                ESP_LOGCONFIG(TAG, "   No CS pin");
-            }
-            
             if (this->busy_pin_ != nullptr) {
                 ESP_LOGCONFIG(TAG, "  BUSY:");
                 LOG_PIN("    Pin: ", this->busy_pin_);

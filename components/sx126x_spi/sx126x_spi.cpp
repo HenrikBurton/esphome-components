@@ -57,7 +57,7 @@ namespace esphome {
         }
 
         void Sx126XSpiComponent::dump_config() {
-            SPIDevice::dump_config();
+            SPIDeviceComponent::dump_config();
 
             ESP_LOGCONFIG(TAG, "sx126x device");
             ESP_LOGCONFIG(TAG, "  radio frequency: %f", this->rf_frequency_);

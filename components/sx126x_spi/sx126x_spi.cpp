@@ -46,12 +46,15 @@ namespace esphome {
                 uint8_t value = 0;
                 this->cs_pin_->digital_write(false);
                 this->enable();
-                this->write_byte16(0xC000);
+                uint8_t command[] = {0xC0, 0x00};
+                transfer(&command, &this->rx_buffer, command.size());
+                //this->write_byte16(0xC000);
                 //this->write_byte(0x00);
-                value = this->read_byte() << 8;
-                value |= this->read_byte();
+                //value = this->read_byte() << 8;
+                //value |= this->read_byte();
                 //this->cs_pin_->digital_write(true);
                 this->disable();
+                value = this->rx_buffer[0] << 8 | this->rx_buffer[1];
                 ESP_LOGD(TAG, "read_register_: %d", value);
             }
 

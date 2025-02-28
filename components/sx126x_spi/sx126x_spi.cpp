@@ -30,12 +30,15 @@ namespace esphome {
                 this->led_on_ = false;
                 ESP_LOGD(TAG, "LED pin setup!");
             }
+
+            this->sec_ticker = millis();
         }
 
         void Sx126XSpiComponent::loop() {
             this->led_handler();
 
-            if ((millis() - this->led_on_millis_) >= 1000) {
+            if ((millis() - this->sec_ticker) >= 1000) {
+                this->sec_ticker = millis();
                 ESP_LOGD(TAG, "Blink!");
                 this->led_blink();
 
@@ -63,7 +66,7 @@ namespace esphome {
 
         void Sx126XSpiComponent::dump_config() {
             ESP_LOGCONFIG(TAG, "sx126x device");
-            ESP_LOGCONFIG(TAG, "  frequency: %f", this->rf_frequency_);
+            ESP_LOGCONFIG(TAG, "  radio frequency: %f", this->rf_frequency_);
 
             if (this->led_pin_ != nullptr) {
                 ESP_LOGCONFIG(TAG, "  LED:");

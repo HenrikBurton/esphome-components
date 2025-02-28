@@ -50,7 +50,7 @@ namespace esphome {
                 //this->write_byte(0x00);
                 value = this->read_byte() << 8;
                 value |= this->read_byte();
-                this->cs_pin_->digital_write(true);
+                //this->cs_pin_->digital_write(true);
                 this->disable();
                 ESP_LOGD(TAG, "read_register_: %d", value);
             }

@@ -38,14 +38,14 @@ namespace esphome {
 
                 ESP_LOGD(TAG, "Read status");
                 uint8_t value = 0;
-                begin_transaction();
+                SPIDevice::begin_transaction();
                 uint8_t command[] = {0xC0, 0x00};
                 write_array(command, sizeof(command));
                 //SPIDevice::write_byte16(0xC000);
                 //value = SPIDevice::read_byte() << 8;
                 //value |= SPIDevice::read_byte();
                 read_array(this->rx_buffer, sizeof(command));
-                end_transaction();
+                SPIDevice::end_transaction();
                 value = this->rx_buffer[0] << 8 | this->rx_buffer[1];
                 ESP_LOGD(TAG, "read_register_: %d", value);
             }

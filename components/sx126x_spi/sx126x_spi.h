@@ -35,6 +35,7 @@ namespace esphome {
                 bool led_on_{false};
                 void led_blink();
                 void led_handler();
+                uint32_t sec_ticker{0};
         };
 
     }  // namespace sx126x_spi

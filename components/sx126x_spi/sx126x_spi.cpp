@@ -44,7 +44,7 @@ namespace esphome {
                 //SPIDevice::write_byte16(0xC000);
                 //value = SPIDevice::read_byte() << 8;
                 //value |= SPIDevice::read_byte();
-                SPIDevice::read_array(&this->rx_buffer, sizeof(command));
+                SPIDevice::read_array(this->rx_buffer, sizeof(command));
                 SPIDevice::disable();
                 value = this->rx_buffer[0] << 8 | this->rx_buffer[1];
                 ESP_LOGD(TAG, "read_register_: %d", value);

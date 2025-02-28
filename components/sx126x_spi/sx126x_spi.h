@@ -7,7 +7,6 @@ namespace esphome {
     namespace sx126x_spi {
 
         class Sx126XSpiComponent : public Component, 
-                                   public SPIDeviceComponent, 
                                    public spi::SPIDevice<spi::BIT_ORDER_MSB_FIRST, spi::CLOCK_POLARITY_LOW, spi::CLOCK_PHASE_LEADING, spi::DATA_RATE_1KHZ> {
 
             public:

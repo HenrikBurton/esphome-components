@@ -45,7 +45,7 @@ namespace esphome {
                 ESP_LOGD(TAG, "Read status");
                 uint8_t value = 0;
                 //this->cs_pin_->digital_write(false);
-                SPIDevice::this->enable();
+                SPIDevice::enable();
                 uint8_t command[] = {0xC0, 0x00};
                 //SPIDevice::this->transfer_array(&command, sizeof(command));
                 this->write_byte16(0xC000);
@@ -53,7 +53,7 @@ namespace esphome {
                 value = this->read_byte() << 8;
                 value |= this->read_byte();
                 //this->cs_pin_->digital_write(true);
-                SPIDevice::this->disable();
+                SPIDevice::disable();
                 value = this->rx_buffer[0] << 8 | this->rx_buffer[1];
                 ESP_LOGD(TAG, "read_register_: %d", value);
             }

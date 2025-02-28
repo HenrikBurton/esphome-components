@@ -16,7 +16,7 @@ namespace esphome {
 
                 void set_rf_frequency (float rf_frequency) { this->rf_frequency_ = rf_frequency; }
                 void set_log_all(bool log_all) { this->log_all_ = log_all; }
-                void set_cs_pin(GPIOPin *cs_pin) { this->cs_pin_ = cs_pin; }
+                //void set_cs_pin(GPIOPin *cs_pin) { this->cs_pin_ = cs_pin; }
                 void set_busy_pin(GPIOPin *busy_pin) { this->busy_pin_ = busy_pin; }
                 
                 float get_setup_priority() const override;

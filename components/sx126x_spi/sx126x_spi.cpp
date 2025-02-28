@@ -47,7 +47,7 @@ namespace esphome {
                 this->cs_pin_->digital_write(false);
                 this->enable();
                 uint8_t command[] = {0xC0, 0x00};
-                this->transfer(&command, &this->rx_buffer, sizeof(command));
+                this->write_array(&command, sizeof(command));
                 //this->write_byte16(0xC000);
                 //this->write_byte(0x00);
                 //value = this->read_byte() << 8;

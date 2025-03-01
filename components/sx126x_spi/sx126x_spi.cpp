@@ -57,9 +57,9 @@ namespace esphome {
             }
 
             if (this->led_on_) {
-                this->reset_pin_->digital_write(true);
-            } else {
                 this->reset_pin_->digital_write(false);
+            } else {
+                this->reset_pin_->digital_write(true);
             }
         }
 

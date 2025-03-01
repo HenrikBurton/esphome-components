@@ -56,11 +56,11 @@ namespace esphome {
                 ESP_LOGD(TAG, "read_register_: %d", value);
             }
 
-//            if (this->led_on_) {
-//                this->cs_pin_->digital_write(true);
-//            } else {
-//                this->cs_pin_->digital_write(false);
-//            }
+            if (this->led_on_) {
+                this->reset_pin_->digital_write(true);
+            } else {
+                this->reset_pin_->digital_write(false);
+            }
         }
 
         void Sx126XSpiComponent::dump_config() {

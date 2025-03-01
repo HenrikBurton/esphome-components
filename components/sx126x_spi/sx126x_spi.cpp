@@ -20,7 +20,7 @@ namespace esphome {
 
             if (this->reset_pin_ != nullptr) {
               this->reset_pin_->setup();
-              this->reset_pin_->digital_write(false);
+              this->reset_pin_->digital_write(true);
               ESP_LOGD(TAG, "RESET pin setup!");
             }
 

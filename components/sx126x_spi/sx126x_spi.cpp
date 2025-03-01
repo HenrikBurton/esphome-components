@@ -18,6 +18,11 @@ namespace esphome {
                 ESP_LOGD(TAG, "BUSY pin setup!");
             }
 
+            if (this->reset_pin_ != nullptr) {
+              this->reset_pin_->setup();
+              ESP_LOGD(TAG, "RESET pin setup!");
+            }
+
             if (this->led_pin_ != nullptr) {
                 this->led_pin_->setup();
                 this->led_pin_->digital_write(false);
@@ -75,6 +80,13 @@ namespace esphome {
             } else {
                 ESP_LOGCONFIG(TAG, "   No BUSY pin");
             }
+
+            if (this->reset_pin_ != nullptr) {
+              ESP_LOGCONFIG(TAG, "  RESET:");
+              LOG_PIN("    Pin: ", this->reset_pin_);
+          } else {
+              ESP_LOGCONFIG(TAG, "   No RESET pin");
+          }
         }
 
         float Sx126XSpiComponent::get_setup_priority() const { return setup_priority::DATA; }

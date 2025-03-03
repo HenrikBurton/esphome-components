@@ -48,7 +48,7 @@ namespace esphome {
 
                 ESP_LOGD(TAG, "Read status");
                 uint8_t value = 0;
-                sx126xcommand({0x8A, 0x00}, this->rx_buffer, 2);    // Set packet type with protocol GFSK
+                sx126xcommand(uint8_t {0x8A, 0x00}, this->rx_buffer, 2);    // Set packet type with protocol GFSK
                 sx126xcommand({0x93, 0x20}, this->rx_buffer, 2);    // SetRxTxFallbackMode,  The radio goes into STDBY_RC mode after Tx or Rx
                 value = this->rx_buffer[0] << 8 | this->rx_buffer[1];
                 ESP_LOGD(TAG, "read_register_: %d", value);

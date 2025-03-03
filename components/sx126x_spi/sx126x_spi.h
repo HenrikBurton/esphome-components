@@ -35,6 +35,7 @@ namespace esphome {
                 bool led_on_{false};
                 void led_blink();
                 void led_handler();
+                void sx126xcommand();
                 uint32_t sec_ticker{0};
                 uint8_t rx_buffer[100];
         };

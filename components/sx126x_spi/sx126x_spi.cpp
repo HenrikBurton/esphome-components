@@ -91,7 +91,7 @@ namespace esphome {
 
         float Sx126XSpiComponent::get_setup_priority() const { return setup_priority::DATA; }
 
-        void led_blink() {
+        void Sx126XSpiComponent::led_blink() {
             if (this->led_pin_ != nullptr) {
               if (!this->led_on_) {
                 this->led_on_millis_ = millis();
@@ -101,7 +101,7 @@ namespace esphome {
             }
           }
         
-          void led_handler() {
+          void Sx126XSpiComponent::led_handler() {
             if (this->led_pin_ != nullptr) {
               if (this->led_on_) {
                 if ((millis() - this->led_on_millis_) >= this->led_blink_time_) {
@@ -112,7 +112,7 @@ namespace esphome {
             }
           }
 
-          void sx126xcommand(uchar_t *command, uchar_t *response, length) {
+          void Sx126XSpiComponent::sx126xcommand(uchar_t *command, uchar_t *response, length) {
             this->delegate_->begin_transaction();
             this->delegate_->transfer(command, response, length);
             this->delegate_->end_transaction();

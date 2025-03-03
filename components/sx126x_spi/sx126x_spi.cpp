@@ -59,12 +59,6 @@ namespace esphome {
                 value = this->rx_buffer[0] << 8 | this->rx_buffer[1];
                 ESP_LOGD(TAG, "read_register_: %d", value);
             }
-
-            if (this->led_on_) {
-                this->reset_pin_->digital_write(false);
-            } else {
-                this->reset_pin_->digital_write(true);
-            }
         }
 
         void Sx126XSpiComponent::dump_config() {

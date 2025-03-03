@@ -52,7 +52,7 @@ namespace esphome {
                 uint8_t cmd3[] = {0x88, 0x03, 0x16, 0x0A, 0x00, 0x00, 0x00, 0x00};   // SetCadParams
                 sx126xcommand(cmd3, this->rx_buffer, 8);
                 uint8_t cmd4[] = {0x89, 0b01111111};                  // Calibrate, All
-                sx126xcommand(cmd5, this->rx_buffer, 2);
+                sx126xcommand(cmd4, this->rx_buffer, 2);
                 uint8_t cmd5[] = {0x10, 0x00};                  // GetStats
                 sx126xcommand(cmd5, this->rx_buffer, 2);
                 uint32_t value;

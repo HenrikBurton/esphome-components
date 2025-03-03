@@ -112,7 +112,7 @@ namespace esphome {
             }
           }
 
-          void sx126xcommand(uchar8_t *command, uchar8_t *response, length) {
+          void sx126xcommand(uint8_t *command, uint8_t *response, uint32_t length) {
             this->delegate_->begin_transaction();
             this->delegate_->transfer(command, response, length);
             this->delegate_->end_transaction();

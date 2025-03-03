@@ -45,11 +45,12 @@ namespace esphome {
                 this->sec_ticker = millis();
                 ESP_LOGD(TAG, "Blink!");
                 this->led_blink();
-                uint8_t * command;
+                uint8_t command[];
                 command = {0x8A, 0x00};                       // Set packet type with protocol GFSK
                 sx126xcommand(command, this->rx_buffer, 2);
                 command = {0x93, 0x20};                       // SetRxTxFallbackMode,  The radio goes into STDBY_RC mode after Tx or Rx
                 sx126xcommand(command, this->rx_buffer, 2);
+                uint32_t value;
                 value = this->rx_buffer[0] << 8 | this->rx_buffer[1];
                 ESP_LOGD(TAG, "read_register_: %d", value);
             }

@@ -50,7 +50,7 @@ namespace esphome {
                 uint8_t value = 0;
                 //this->delegate_->begin_transaction();
                 uint8_t command[] = {0x80, 0x01};
-                sx126xcommand(command, this->rx_buffer, sizeof(command))
+                sx126xcommand(command, this->rx_buffer, sizeof(command));
                 //this->delegate_->transfer(command, this->rx_buffer, sizeof(command));
                 //SPIDevice::write_byte16(0xC000);
                 //value = SPIDevice::read_byte() << 8;

@@ -48,14 +48,15 @@ namespace esphome {
 
                 ESP_LOGD(TAG, "Read status");
                 uint8_t value = 0;
-                this->delegate_->begin_transaction();
+                //this->delegate_->begin_transaction();
                 uint8_t command[] = {0x80, 0x01};
-                this->delegate_->transfer(command, this->rx_buffer, sizeof(command));
+                sx126xcommand(command, this->rx_buffer, sizeof(command))
+                //this->delegate_->transfer(command, this->rx_buffer, sizeof(command));
                 //SPIDevice::write_byte16(0xC000);
                 //value = SPIDevice::read_byte() << 8;
                 //value |= SPIDevice::read_byte();
                 //this->delegate_->read_array(this->rx_buffer, sizeof(command));
-                this->delegate_->end_transaction();
+                //this->delegate_->end_transaction();
                 value = this->rx_buffer[0] << 8 | this->rx_buffer[1];
                 ESP_LOGD(TAG, "read_register_: %d", value);
             }
@@ -109,6 +110,12 @@ namespace esphome {
                 }
               }
             }
+          }
+
+          void Sx126XSpiComponent::sx126xcommand(uchar_t *command, uchar_t *response, length) {
+            this->delegate_->begin_transaction();
+            this->delegate_->transfer(command, response, length);
+            this->delegate_->end_transaction();
           }
 
     }  // namespace sx126x_spi

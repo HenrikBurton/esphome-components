@@ -48,15 +48,8 @@ namespace esphome {
 
                 ESP_LOGD(TAG, "Read status");
                 uint8_t value = 0;
-                //this->delegate_->begin_transaction();
-                uint8_t command[] = {0x80, 0x01};
-                sx126xcommand(command, this->rx_buffer, sizeof(command));
-                //this->delegate_->transfer(command, this->rx_buffer, sizeof(command));
-                //SPIDevice::write_byte16(0xC000);
-                //value = SPIDevice::read_byte() << 8;
-                //value |= SPIDevice::read_byte();
-                //this->delegate_->read_array(this->rx_buffer, sizeof(command));
-                //this->delegate_->end_transaction();
+                sx126xcommand({0x8A, 0x00}, this->rx_buffer, 2);    // Set packet type with protocol GFSK
+                sx126xcommand({0x93, 0x20}, this->rx_buffer, 2);    // SetRxTxFallbackMode,  The radio goes into STDBY_RC mode after Tx or Rx
                 value = this->rx_buffer[0] << 8 | this->rx_buffer[1];
                 ESP_LOGD(TAG, "read_register_: %d", value);
             }

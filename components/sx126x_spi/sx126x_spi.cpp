@@ -38,6 +38,7 @@ namespace esphome {
             this->sec_ticker = millis();
 
             delay(3);
+            sx126xcommand(cmd5, this->rx_buffer, 2);
             uint8_t cmd1[] = {0x8A, 0x00};                       // Set packet type with protocol GFSK
             sx126xcommand(cmd1, this->rx_buffer, 2);
             uint8_t cmd2[] = {0x93, 0x20};                       // SetRxTxFallbackMode,  The radio goes into STDBY_RC mode after Tx or Rx

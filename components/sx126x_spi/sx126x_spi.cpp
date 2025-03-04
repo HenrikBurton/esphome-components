@@ -48,6 +48,8 @@ namespace esphome {
             delay(3);
             uint8_t cmd6[] = {0x8B, 0x00, 0x28, 0x00, 0x00, 0x1A, 0x00, 0x02, 0x75 };      // SetModulationParams, br = 100000, PulseShape = non, Bw = 156,2, FreqDev = 600
             sx126xcommand(cmd6, this->rx_buffer, 9);
+            uint8_t cmd7[] = {0x82, 0x00};                        // SetRX, no timeout
+            sx126xcommand(cmd7, this->rx_buffer, 2);
         }
 
         void Sx126XSpiComponent::loop() {

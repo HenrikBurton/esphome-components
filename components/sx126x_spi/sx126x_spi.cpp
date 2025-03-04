@@ -51,7 +51,7 @@ namespace esphome {
             sx126xcommand(cmd6, this->rx_buffer, 9);
             uint8_t cmd8[] = {0x8C, 0x00, 0x20, 0x00, 0x10, 0x00, 0x01, 0xFF, 0x01, 0x00}; // SetPacketParams, 
             sx126xcommand(cmd8, this->rx_buffer, 10);
-            uint8_t cmd7[] = {0x82, 0x00, 0x00, 0x00};                        // SetRX, no timeout
+            uint8_t cmd7[] = {0x82, 0xff, 0xff, 0xff};                        // SetRX, no timeout
             sx126xcommand(cmd7, this->rx_buffer, 4);
             delay(3);
             uint8_t cmd5[] = {0xC0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 };                        // GetStats

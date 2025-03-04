@@ -50,8 +50,9 @@ namespace esphome {
             sx126xcommand(cmd6, this->rx_buffer, 9);
             uint8_t cmd7[] = {0x82, 0x00, 0x00, 0x00};                        // SetRX, no timeout
             sx126xcommand(cmd7, this->rx_buffer, 4);
-            uint8_t cmd5[] = {0x13, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 };                        // GetStats
-            sx126xcommand(cmd5, this->rx_buffer, 4);
+            delay(3);
+            uint8_t cmd5[] = {0xC0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 };                        // GetStats
+            sx126xcommand(cmd5, this->rx_buffer, 2);
             uint32_t value;
             value = this->rx_buffer[2] << 8 | this->rx_buffer[3];
             ESP_LOGD(TAG, "status: %d NbPktRX %d", this->rx_buffer[0] << 8 | this->rx_buffer[1], this->rx_buffer[2] << 8 | this->rx_buffer[3]);

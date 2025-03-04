@@ -53,10 +53,11 @@ namespace esphome {
                 sx126xcommand(cmd3, this->rx_buffer, 8);
                 uint8_t cmd4[] = {0x89, 0b01111111};                  // Calibrate, All
                 sx126xcommand(cmd4, this->rx_buffer, 2);
-                uint8_t cmd5[] = {0x10, 0x00};                        // GetStats
-                sx126xcommand(cmd5, this->rx_buffer, 2);
+                delay(3);
                 uint8_t cmd6[] = {0x8B, 0x00, 0x28, 0x00, 0x00, 0x1A, 0x00, 0x02, 0x75 };      // SetModulationParams, br = 100000, PulseShape = non, Bw = 156,2, FreqDev = 600
                 sx126xcommand(cmd6, this->rx_buffer, 9);
+                uint8_t cmd5[] = {0x10, 0x00};                        // GetStats
+                sx126xcommand(cmd5, this->rx_buffer, 2);
                 uint32_t value;
                 value = this->rx_buffer[0] << 8 | this->rx_buffer[1];
                 ESP_LOGD(TAG, "read_register_: %d", value);

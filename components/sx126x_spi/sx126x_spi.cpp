@@ -56,6 +56,7 @@ namespace esphome {
             delay(3);
             uint8_t cmd5[] = {0xC0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 };                        // GetStats
             sx126xcommand(cmd5, this->rx_buffer, 2);
+            sx126xcommand(cmd5, this->rx_buffer, 2);
             uint32_t value;
             value = this->rx_buffer[2] << 8 | this->rx_buffer[3];
             ESP_LOGD(TAG, "status: %d NbPktRX %d", this->rx_buffer[0] << 8 | this->rx_buffer[1], this->rx_buffer[2] << 8 | this->rx_buffer[3]);

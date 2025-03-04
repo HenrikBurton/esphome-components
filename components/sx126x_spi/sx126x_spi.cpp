@@ -44,7 +44,7 @@ namespace esphome {
             uint8_t cmd3[] = {0x88, 0x03, 0x16, 0x0A, 0x00, 0x00, 0x00, 0x00};   // SetCadParams
             sx126xcommand(cmd3, this->rx_buffer, 8);
             uint8_t cmd4[] = {0x89, 0b01111111};                  // Calibrate, All
-            sx126xcommand(cmd4, this->rx_buffer, 2);
+            //sx126xcommand(cmd4, this->rx_buffer, 2);
             delay(3);
             uint8_t cmd6[] = {0x8B, 0x00, 0x28, 0x00, 0x00, 0x1A, 0x00, 0x02, 0x75 };      // SetModulationParams, br = 100000, PulseShape = non, Bw = 156,2, FreqDev = 600
             sx126xcommand(cmd6, this->rx_buffer, 9);

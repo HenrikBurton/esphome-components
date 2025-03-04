@@ -53,6 +53,7 @@ namespace esphome {
             sx126xcommand(cmd3, this->rx_buffer, 8);
             uint8_t cmd11[] = {0x98, 0xD7, 0xDB };                // Calibrate image
             sx126xcommand(cmd11, this->rx_buffer, 3);
+            delay(3);
             uint8_t cmd4[] = {0x89, 0b01111111};                  // Calibrate, All
             sx126xcommand(cmd4, this->rx_buffer, 2);
             delay(3);

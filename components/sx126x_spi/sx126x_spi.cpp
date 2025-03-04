@@ -41,7 +41,7 @@ namespace esphome {
             uint8_t cmd0[] = {0xC0, 0x00 }; // GetStats
             sx126xcommand(cmd0, this->rx_buffer, 2);
             uint8_t cmd9[] = {0x80, 0x01};                       // SeStandby, STDBY_XOSC
-            sx126xcommand(cmd1, this->rx_buffer, 2);
+            sx126xcommand(cmd9, this->rx_buffer, 2);
             uint8_t cmd1[] = {0x8A, 0x00};                       // Set packet type with protocol GFSK
             sx126xcommand(cmd1, this->rx_buffer, 2);
             uint8_t cmd2[] = {0x93, 0x20};                       // SetRxTxFallbackMode,  The radio goes into STDBY_RC mode after Tx or Rx

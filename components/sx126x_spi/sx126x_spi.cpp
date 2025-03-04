@@ -59,7 +59,7 @@ namespace esphome {
                 this->sec_ticker = millis();
                 ESP_LOGD(TAG, "Blink!");
                 this->led_blink();
-                uint8_t cmd5[] = {0xC0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 };                        // GetStats
+                uint8_t cmd5[] = {0x13, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 };                        // GetStats
                 sx126xcommand(cmd5, this->rx_buffer, 2);
                 uint32_t value;
                 value = this->rx_buffer[2] << 8 | this->rx_buffer[3];

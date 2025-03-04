@@ -43,7 +43,7 @@ namespace esphome {
             uint8_t cmd9[] = {0x80, 0x01};                       // SeStandby, STDBY_XOSC
             sx126xcommand(cmd9, this->rx_buffer, 2);
             delay(3);
-            uint8_t cmd10[] = {0x8A, 0x36, 0x40, 0x00, 0x00 };         // Set RF requency
+            uint8_t cmd10[] = {0x86, 0x36, 0x40, 0x00, 0x00 };         // Set RF requency
             sx126xcommand(cmd10, this->rx_buffer, 5);
             uint8_t cmd1[] = {0x8A, 0x00};                       // Set packet type with protocol GFSK
             sx126xcommand(cmd1, this->rx_buffer, 2);

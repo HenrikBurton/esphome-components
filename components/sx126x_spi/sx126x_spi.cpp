@@ -59,7 +59,7 @@ namespace esphome {
                 uint8_t cmd5[] = {0x10, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 };                        // GetStats
                 sx126xcommand(cmd5, this->rx_buffer, 8);
                 uint32_t value;
-                value = this->rx_buffer[0] << 8 | this->rx_buffer[1];
+                value = this->rx_buffer[2] << 8 | this->rx_buffer[3];
                 ESP_LOGD(TAG, "read_register_: %d", value);
             }
         }

@@ -67,7 +67,7 @@ namespace esphome {
             sx126xcommand(cmd8, this->rx_buffer, 10);
             uint8_t cmd14[] = {0x96, 0x00 };                                    // SetRegulatorMode, 
             sx126xcommand(cmd14, this->rx_buffer, 2);
-            uint8_t cmd7[] = {0x82, 0xff, 0xff, 0xff};                        // SetRX, no timeout
+            uint8_t cmd7[] = {0x82, 0x00, 0x00, 0x00};                        // SetRX, no timeout
             sx126xcommand(cmd7, this->rx_buffer, 4);
             delay(3);
             uint8_t cmd5[] = {0xC0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 };                        // GetStats
@@ -84,7 +84,7 @@ namespace esphome {
                 this->led_blink();
                 uint8_t cmd5[] = {0x17, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 };                        // GetStats
                 sx126xcommand(cmd5, this->rx_buffer, 4);
-                ESP_LOGD(TAG, "status: %d, %d, %d, %d", this->rx_buffer[1], 
+                ESP_LOGD(TAG, "status: %02X, %04X, %04X, %04X", this->rx_buffer[1], 
                                                         this->rx_buffer[2] << 8 | this->rx_buffer[3],
                                                         this->rx_buffer[4] << 8 | this->rx_buffer[5],
                                                         this->rx_buffer[6] << 8 | this->rx_buffer[7]);

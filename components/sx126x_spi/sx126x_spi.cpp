@@ -42,7 +42,9 @@ namespace esphome {
             sx126xcommand(cmd0, this->rx_buffer, 2);
             uint8_t cmd12[] = {0x1D, 0x06, 0xc0,  0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 };                      // ReadRegister SyncWord
             sx126xcommand(cmd12, this->rx_buffer, 12);
-            uint8_t cmd9[] = {0x80, 0x01};                       // SeStandby, STDBY_XOSC
+            uint8_t cmd13[] = {0x9D, 0x01 };                      // SetDio2AsRfSwitchCtrl, enable
+            sx126xcommand(cmd13, this->rx_buffer, 12);
+            uint8_t cmd9[] = {0x80, 0x00};                       // SetStandby, STDBY_XOSC
             sx126xcommand(cmd9, this->rx_buffer, 2);
             delay(3);
             uint8_t cmd10[] = {0x86, 0x36, 0x40, 0x00, 0x00 };         // Set RF requency

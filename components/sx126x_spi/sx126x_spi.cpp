@@ -40,16 +40,20 @@ namespace esphome {
             delay(3);
             uint8_t cmd0[] = {0xC0, 0x00 };                      // GetStats
             sx126xcommand(cmd0, this->rx_buffer, 2);
-            uint8_t cmd12[] = {0x1D, 0x06, 0xc0,  0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 };                      // ReadRegister SyncWord
+            uint8_t cmd12[] = {0x1D, 0x06, 0xc0,  0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 };      // Read syncword                // ReadRegister SyncWord
             sx126xcommand(cmd12, this->rx_buffer, 12);
             uint8_t cmd13[] = {0x9D, 0x01 };                      // SetDio2AsRfSwitchCtrl, enable
             sx126xcommand(cmd13, this->rx_buffer, 2);
             uint8_t cmd15[] = {0x8F, 0x00, 0x00 };                      // SetBufferBaseAddress
             sx126xcommand(cmd15, this->rx_buffer, 3);
-            uint8_t cmd9[] = {0x80, 0x00};                       // SetStandby, STDBY_XOSC
+            uint8_t cmd9[] = {0x80, 0x00};                       // SetStandby, STDBY_RC = 0x00 STDBY_XOSC = 0x01
             sx126xcommand(cmd9, this->rx_buffer, 2);
             delay(3);
-            uint8_t cmd10[] = {0x86, 0x36, 0x40, 0x00, 0x00 };         // Set RF requency
+            uint32_t freq = (868 * (1 << 25)) / 32;
+            uint8_t cmd10[] = {0x86, freq >> 24 & 0xff, 
+                                     freq >> 16 & 0xff,
+                                     freq >> 8 & 0xff,
+                                     freq & 0xff };         // Set RF requency
             sx126xcommand(cmd10, this->rx_buffer, 5);
             uint8_t cmd1[] = {0x8A, 0x00};                       // Set packet type with protocol GFSK
             sx126xcommand(cmd1, this->rx_buffer, 2);

@@ -42,7 +42,7 @@ namespace esphome {
             sx126xcommand(cmd0, this->rx_buffer, 2);
             uint8_t cmd12[] = {0x1D, 0x06, 0xc0,  0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 };      // Read syncword                // ReadRegister SyncWord
             sx126xcommand(cmd12, this->rx_buffer, 12);
-            uint8_t cmd16[] = {0x0D, 0x06, 0xc0,  0x54, 0x76, 0x96 };      // Write syncword
+            uint8_t cmd16[] = {0x0D, 0x06, 0xc0,  0x54, 0x76, 0x96, 0x00, 0x00, 0x00, 0x00, 0x00 };      // Write syncword
             sx126xcommand(cmd16, this->rx_buffer, 6);
             sx126xcommand(cmd12, this->rx_buffer, 12);
             uint8_t cmd13[] = {0x9D, 0x01 };                      // SetDio2AsRfSwitchCtrl, enable

@@ -59,9 +59,9 @@ namespace esphome {
             sx126xcommand(cmd1, this->rx_buffer, 2);
             uint8_t cmd2[] = {0x93, 0x20};                       // SetRxTxFallbackMode,  The radio goes into STDBY_RC mode after Tx or Rx
             sx126xcommand(cmd2, this->rx_buffer, 2);
-            //uint8_t cmd3[] = {0x88, 0x03, 0x16, 0x0A, 0x00, 0x00, 0x00, 0x00};   // SetCadParams
-            sx126xcommand(cmd3, this->rx_buffer, 8);
-            //uint8_t cmd11[] = {0x98, 0xD7, 0xDB };                // Calibrate image
+            uint8_t cmd3[] = {0x88, 0x03, 0x16, 0x0A, 0x00, 0x00, 0x00, 0x00};   // SetCadParams
+            //sx126xcommand(cmd3, this->rx_buffer, 8);
+            uint8_t cmd11[] = {0x98, 0xD7, 0xDB };                // Calibrate image
             //sx126xcommand(cmd11, this->rx_buffer, 3);
             delay(3);
             uint8_t cmd4[] = {0x89, 0b01111111};                  // Calibrate, All

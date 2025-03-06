@@ -42,6 +42,9 @@ namespace esphome {
             sx126xcommand(cmd0, this->rx_buffer, 2);
             uint8_t cmd12[] = {0x1D, 0x06, 0xc0,  0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 };      // Read syncword                // ReadRegister SyncWord
             sx126xcommand(cmd12, this->rx_buffer, 12);
+            uint8_t cmd16[] = {0x0D, 0x06, 0xc0,  0x54, 0x76, 0x96 };      // Write syncword
+            sx126xcommand(cmd16, this->rx_buffer, 6);
+            sx126xcommand(cmd12, this->rx_buffer, 12);
             uint8_t cmd13[] = {0x9D, 0x01 };                      // SetDio2AsRfSwitchCtrl, enable
             sx126xcommand(cmd13, this->rx_buffer, 2);
             uint8_t cmd15[] = {0x8F, 0x00, 0x00 };                      // SetBufferBaseAddress
@@ -69,7 +72,7 @@ namespace esphome {
             delay(3);
             uint8_t cmd6[] = {0x8B, 0x00, 0x50, 0x00, 0x00, 0x1f, 0x00, 0x66, 0x66 };      // SetModulationParams, br = 50000, PulseShape = non, Bw = 156,2, FreqDev = 600
             sx126xcommand(cmd6, this->rx_buffer, 9);
-            uint8_t cmd8[] = {0x8C, 0x00, 0x20, 0x00, 0x10, 0x00, 0x00, 0xFF, 0x01, 0x00}; // SetPacketParams, 
+            uint8_t cmd8[] = {0x8C, 0x00, 0x18, 0x00, 0x10, 0x00, 0x00, 0xFF, 0x01, 0x00}; // SetPacketParams, 
             sx126xcommand(cmd8, this->rx_buffer, 10);
             uint8_t cmd14[] = {0x96, 0x01 };                                    // SetRegulatorMode, 
             sx126xcommand(cmd14, this->rx_buffer, 2);

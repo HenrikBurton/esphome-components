@@ -67,7 +67,7 @@ namespace esphome {
             uint8_t cmd4[] = {0x89, 0b01111111};                  // Calibrate, All
             //sx126xcommand(cmd4, this->rx_buffer, 2);
             delay(3);
-            uint8_t cmd6[] = {0x8B, 0x00, 0x28, 0x00, 0x00, 0x1A, 0x00, 0x02, 0x75 };      // SetModulationParams, br = 100000, PulseShape = non, Bw = 156,2, FreqDev = 600
+            uint8_t cmd6[] = {0x8B, 0x00, 0x50, 0x00, 0x00, 0x1f, 0x00, 0x66, 0x66 };      // SetModulationParams, br = 50000, PulseShape = non, Bw = 156,2, FreqDev = 600
             sx126xcommand(cmd6, this->rx_buffer, 9);
             uint8_t cmd8[] = {0x8C, 0x00, 0x20, 0x00, 0x10, 0x00, 0x01, 0xFF, 0x01, 0x00}; // SetPacketParams, 
             sx126xcommand(cmd8, this->rx_buffer, 10);

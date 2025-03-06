@@ -50,10 +50,10 @@ namespace esphome {
             sx126xcommand(cmd9, this->rx_buffer, 2);
             delay(3);
             uint32_t freq = (868 * (1 << 25)) / 32;
-            uint8_t cmd10[] = {0x86, freq >> 24 & 0xff, 
-                                     freq >> 16 & 0xff,
-                                     freq >> 8 & 0xff,
-                                     freq & 0xff };         // Set RF requency
+            uint8_t cmd10[] = {0x86, uint8_t (freq >> 24 & 0xff), 
+                                     uint8_t (freq >> 16 & 0xff),
+                                     uint8_t (freq >> 8 & 0xff),
+                                     uint_t (freq & 0xff) };         // Set RF requency
             sx126xcommand(cmd10, this->rx_buffer, 5);
             uint8_t cmd1[] = {0x8A, 0x00};                       // Set packet type with protocol GFSK
             sx126xcommand(cmd1, this->rx_buffer, 2);

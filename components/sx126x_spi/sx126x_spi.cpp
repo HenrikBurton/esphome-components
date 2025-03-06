@@ -49,7 +49,7 @@ namespace esphome {
             uint8_t cmd9[] = {0x80, 0x00};                       // SetStandby, STDBY_RC = 0x00 STDBY_XOSC = 0x01
             sx126xcommand(cmd9, this->rx_buffer, 2);
             delay(3);
-            uint32_t freq = (868 * (1 << 25)) / 32;
+            uint32_t freq = uint32_t ((868.0f * (1 << 25)) / 32.0f);
             uint8_t cmd10[] = {0x86, uint8_t (freq >> 24 & 0xff), 
                                      uint8_t (freq >> 16 & 0xff),
                                      uint8_t (freq >> 8 & 0xff),

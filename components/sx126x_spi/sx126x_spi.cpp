@@ -76,6 +76,8 @@ namespace esphome {
             sx126xcommand(cmd8, this->rx_buffer, 10);
             uint8_t cmd14[] = {0x96, 0x01 };                                    // SetRegulatorMode, 
             sx126xcommand(cmd14, this->rx_buffer, 2);
+            uint8_t cmd17[] = {0x08, 0x03, 0xff, 0x03, 0xff, 0x00, 0x00, 0x00, 0x00 };                 // SetDioIrqParams
+            sx126xcommand(cmd17, this->rx_buffer, 9);
             uint8_t cmd5[] = {0xC0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 };                        // GetStats
             sx126xcommand(cmd5, this->rx_buffer, 2);
             uint8_t cmd7[] = {0x82, 0x00, 0x00, 0x00};                        // SetRX, no timeout

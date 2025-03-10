@@ -83,7 +83,7 @@ namespace esphome {
             uint8_t cmd18[] = {0x80, 0x00};                       // SetStandby, STDBY_RC = 0x00 STDBY_XOSC = 0x01
             sx126xcommand(cmd18, this->rx_buffer, 2);
             uint8_t cmd7[] = {0x82, 0x00, 0x00, 0x00};                        // SetRX, no timeout
-            //sx126xcommand(cmd7, this->rx_buffer, 4);
+            sx126xcommand(cmd7, this->rx_buffer, 4);
             delay(3);
             sx126xcommand(cmd5, this->rx_buffer, 2);
             sx126xcommand(cmd5, this->rx_buffer, 2);

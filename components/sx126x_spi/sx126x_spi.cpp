@@ -63,20 +63,13 @@ namespace esphome {
 
             state = setCurrentLimit(60.0);
 
-            state = setPreambleLength(preambleLength);
+            state = setPacketParams(16, RADIOLIB_SX126X_GFSK_PREAMBLE_DETECT_8, RADIOLIB_SX126X_GFSK_CRC_OFF, 24, RADIOLIB_SX126X_GFSK_ADDRESS_FILT_OFF, 
+              RADIOLIB_SX126X_GFSK_WHITENING_OFF, RADIOLIB_SX126X_PACKET_TYPE_GFSK, RADIOLIB_SX126X_GFSK_PACKET_VARIABLE);
+            
+            state = setSyncWord();
 
-            uint8_t sync[] = {0x12, 0xAD};
-            state = setSyncWord(sync, 2);
 
-            state = setDataShaping(RADIOLIB_SHAPING_NONE);
-
-            state = setEncoding(RADIOLIB_ENCODING_NRZ);
-
-            state = variablePacketLengthMode(RADIOLIB_SX126X_MAX_PACKET_LENGTH);
-
-            state = setCRC(2);
-
-            state = setDio2AsRfSwitch(true);
+            state = setDio2AsRfSwitch(RADIOLIB_SX126X_DIO2_AS_RF_SWITCH);
 
 
 
@@ -345,8 +338,37 @@ namespace esphome {
             return(this->delegate_->transfer(data, this->rx_buffer, 4));
           }
 
+          int16_t Sx126XSpiComponent::setPacketParams(uint16_t preambleLen, uint8_t preambleDetectorLen, uint8_t crcType, uint8_t syncWordLen, uint8_t addrCmp, uint8_t whiten, uint8_t packType, uint8_t payloadLen) {
+
+            const uint8_t data[] = {
+              RADIOLIB_SX126X_CMD_SET_PACKET_PARAMS,
+              (uint8_t)((preambleLen >> 8) & 0xFF), (uint8_t)(preambleLen & 0xFF),
+              preambleDetectorLen, syncWordLen, addrCmp,
+              packType, payloadLen, crcType, whiten
+            };
+            return(this->delegate_->transfer(data, this->rx_buffer, 10));
+          }
+
+          int16_t Sx126XSpiComponent::setSyncWord() {
+          
+            // update register
+            const uint8_t data[] = { 
+              RADIOLIB_SX126X_CMD_WRITE_REGISTER,
+              RADIOLIB_SX126X_REG_SYNC_WORD_0 >> 8 & 0xff, RADIOLIB_SX126X_REG_SYNC_WORD_0  & 0xff,
+              0x54, 0x76, 0x96, 0x00, 0x00, 0x00
+            };
+
+            return(this->delegate_->transfer(data, this->rx_buffer, 9));
+          }
+
+          int16_t Sx126XSpiComponent::setDio2AsRfSwitch(uint8_t dio2mode) {
+
+            const uint8_t data[] = {
+              RADIOLIB_SX126X_CMD_SET_DIO2_AS_RF_SWITCH_CTRL,
+              dio2mode
+            };
+
+            return(this->delegate_->transfer(data, this->rx_buffer, 2));
+          }
         }  // namespace sx126x_spi
 }  // namespace esphome
-
-/* The sync word for Wireless M-Bus (wM-Bus) in S1 mode is 0x547696. This corresponds to the S-mode sync word 000111011010010110, preceded by three repetitions of (01) preamble bits. The sync word length is set to 24 bits, and data transmission uses Manchester encoding with MSB first
-*/

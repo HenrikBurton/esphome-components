@@ -37,6 +37,52 @@ namespace esphome {
 
             this->sec_ticker = millis();
 
+            // Setup device for FSK
+
+            state = standby();
+
+            //state = setTCXO(tcxoVoltage);
+
+            state = setBufferBaseAddress(0x00, 0x00);
+
+            state = setPacketType(RADIOLIB_SX126X_PACKET_TYPE_GFSK);
+
+            state = setFallbackeMode(RADIOLIB_SX126X_RX_TX_FALLBACK_MODE_STDBY_RC);
+
+            state = setCadParams();
+
+            state = clearIrqStatus(0);
+
+            state = setDioIrqParams(RADIOLIB_SX126X_IRQ_NONE, RADIOLIB_SX126X_IRQ_NONE, 0, 0);
+
+            state = setCalibration(RADIOLIB_SX126X_CALIBRATE_ALL);
+
+            state = setBitRate(br);
+
+            state = setFrequencyDeviation(freqDev);
+
+            state = setRxBandwidth(rxBw);
+
+            state = setCurrentLimit(60.0);
+
+            state = setPreambleLength(preambleLength);
+
+            uint8_t sync[] = {0x12, 0xAD};
+            state = setSyncWord(sync, 2);
+
+            state = setDataShaping(RADIOLIB_SHAPING_NONE);
+
+            state = setEncoding(RADIOLIB_ENCODING_NRZ);
+
+            state = variablePacketLengthMode(RADIOLIB_SX126X_MAX_PACKET_LENGTH);
+
+            state = setCRC(2);
+
+            state = setDio2AsRfSwitch(true);
+
+
+
+/*
             delay(3);
             uint8_t cmd0[] = {0xC0, 0x00 };                      // GetStats
             sx126xcommand(cmd0, this->rx_buffer, 2);
@@ -87,6 +133,7 @@ namespace esphome {
             delay(3);
             sx126xcommand(cmd5, this->rx_buffer, 2);
             sx126xcommand(cmd5, this->rx_buffer, 2);
+*/
         }
 
         void Sx126XSpiComponent::loop() {
@@ -161,5 +208,58 @@ namespace esphome {
             this->delegate_->end_transaction();
           }
 
+          int16_t Sx126XSpiComponent::standby(uint8_t mode) {
+            const uint8_t data[] = { RADIOLIB_SX126X_CMD_SET_STANDBY, mode };
+            return(this->delegate_->transfer(data, this->rx_buffer, 2);
+          }
+
+          int16_t Sx126XSpiComponent::setBufferBaseAddress(uint8_t txBaseAddress, uint8_t rxBaseAddress) {
+            const uint8_t data[] = { RADIOLIB_SX126X_CMD_SET_BUFFER_BASE_ADDRESS, 0, txBaseAddress, rxBaseAddress };
+            return(this->delegate_->transfer(data, this->rx_buffer, 4);
+          }
+
+          int16_t Sx126XSpiComponent::setPacketType(uint8_t type) {
+            const uint8_t data[] = { RADIOLIB_SX126X_CMD_SET_PACKET_TYPE, type };
+            return(this->delegate_->transfer(data, this->rx_buffer, 2);
+          }
+
+          int16_t Sx126XSpiComponent::setFallbackMode(uint8_t mode) {
+            const uint8_t data[] = { RADIOLIB_SX126X_CMD_SET_RX_TX_FALLBACK_MODE, mode };
+            return(this->delegate_->transfer(data, this->rx_buffer, 2);
+          }
+
+          int16_t Sx126XSpiComponent::setCadParams() {
+            const uint8_t data[] = { RADIOLIB_SX126X_CMD_SET_CAD_PARAMS,
+                                     RADIOLIB_SX126X_CAD_ON_8_SYMB,
+                                     9 + 13,
+                                     OLIB_SX126X_CAD_PARAM_DET_MIN,
+                                     RADIOLIB_SX126X_CAD_GOTO_STDBY,
+                                     0x00,
+                                     0x00,
+                                     0x00
+            };
+
+            return(this->delegate_->transfer(data, this->rx_buffer, 8);
+          }
+
+          int16_t Sx126XSpiComponent::clearIrqStatus(uint16_t clearIrqParams) {
+            const uint8_t data[] = { RADIOLIB_SX126X_CMD_CLEAR_IRQ_STATUS, (uint8_t)((clearIrqParams >> 8) & 0xFF), (uint8_t)(clearIrqParams & 0xFF) };
+            return(this->delegate_->transfer(data, this->rx_buffer, 3);
+          }
+
+          int16_t Sx126XSpiComponent::setDioIrqParams(uint16_t irqMask, uint16_t dio1Mask, uint16_t dio2Mask, uint16_t dio3Mask) {
+            const uint8_t data[] = {RADIOLIB_SX126X_CMD_SET_DIO_IRQ_PARAMS,
+                               (uint8_t)((irqMask >> 8) & 0xFF), (uint8_t)(irqMask & 0xFF),
+                               (uint8_t)((dio1Mask >> 8) & 0xFF), (uint8_t)(dio1Mask & 0xFF),
+                               (uint8_t)((dio2Mask >> 8) & 0xFF), (uint8_t)(dio2Mask & 0xFF),
+                               (uint8_t)((dio3Mask >> 8) & 0xFF), (uint8_t)(dio3Mask & 0xFF)
+            };
+            return(this->delegate_->transfer(data, this->rx_buffer, 9);
+          }
+
+          int16_t Sx126XSpiComponent::setCalibration(uint8_t type) {
+            const uint8_t data[] = { RADIOLIB_SX126X_CMD_CALIBRATE, type };
+            return(this->delegate_->transfer(data, this->rx_buffer, 2);
+          }
     }  // namespace sx126x_spi
 }  // namespace esphome

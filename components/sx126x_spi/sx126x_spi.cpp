@@ -57,11 +57,9 @@ namespace esphome {
 
             state = setCalibration(RADIOLIB_SX126X_CALIBRATE_ALL);
 
-            state = setBitRate(br);
+            state = setRegulatorMode(RADIOLIB_SX126X_REGULATOR_LDO); // RADIOLIB_SX126X_REGULATOR_DC_DC
 
-            state = setFrequencyDeviation(freqDev);
-
-            state = setRxBandwidth(rxBw);
+            state = setModulationParams(float br, float freqDev, 50000.0f, RADIOLIB_SX126X_GFSK_FILTER_NONE)
 
             state = setCurrentLimit(60.0);
 
@@ -261,5 +259,94 @@ namespace esphome {
             const uint8_t data[] = { RADIOLIB_SX126X_CMD_CALIBRATE, type };
             return(this->delegate_->transfer(data, this->rx_buffer, 2);
           }
-    }  // namespace sx126x_spi
+
+          int16_t Sx126XSpiComponent::setRegulatorMode(uint8_t mode) {
+            const uint8_t data[] = { RADIOLIB_SX126X_CMD_SET_REGULATOR_MODE, mode };
+            return(this->delegate_->transfer(data, this->rx_buffer, 2));
+          }
+
+          int16_t Sx126XSpiComponent::setModulationParams(float br, float freqDev, float rxBw, uint32_t pulseShape) {
+
+            // calculate raw bit rate value
+            uint32_t brRaw = (uint32_t)((RADIOLIB_SX126X_CRYSTAL_FREQ * 1000000.0f * 32.0f) / (br * 1000.0f));
+
+            // calculate raw frequency deviation value
+            uint32_t freqDevRaw = (uint32_t)(((FreqDev * 1000.0f) * (float)((uint32_t)(1) << 25)) / (RADIOLIB_SX126X_CRYSTAL_FREQ * 1000000.0f));
+
+            // check allowed receiver bandwidth values
+
+            uint32_t rxBandwidth = RADIOLIB_SX126X_GFSK_RX_BW_467_0;
+
+            if(fabsf(rxBw - 4.8f) <= 0.001f) {
+              rxBandwidth = RADIOLIB_SX126X_GFSK_RX_BW_4_8;
+            } else if(fabsf(rxBw - 5.8f) <= 0.001f) {
+              rxBandwidth = RADIOLIB_SX126X_GFSK_RX_BW_5_8;
+            } else if(fabsf(rxBw - 7.3f) <= 0.001f) {
+              rxBandwidth = RADIOLIB_SX126X_GFSK_RX_BW_7_3;
+            } else if(fabsf(rxBw - 9.7f) <= 0.001f) {
+              rxBandwidth = RADIOLIB_SX126X_GFSK_RX_BW_9_7;
+            } else if(fabsf(rxBw - 11.7f) <= 0.001f) {
+              rxBandwidth = RADIOLIB_SX126X_GFSK_RX_BW_11_7;
+            } else if(fabsf(rxBw - 14.6f) <= 0.001f) {
+              rxBandwidth = RADIOLIB_SX126X_GFSK_RX_BW_14_6;
+            } else if(fabsf(rxBw - 19.5f) <= 0.001f) {
+              rxBandwidth = RADIOLIB_SX126X_GFSK_RX_BW_19_5;
+            } else if(fabsf(rxBw - 23.4f) <= 0.001f) {
+              rxBandwidth = RADIOLIB_SX126X_GFSK_RX_BW_23_4;
+            } else if(fabsf(rxBw - 29.3f) <= 0.001f) {
+              rxBandwidth = RADIOLIB_SX126X_GFSK_RX_BW_29_3;
+            } else if(fabsf(rxBw - 39.0f) <= 0.001f) {
+              rxBandwidth = RADIOLIB_SX126X_GFSK_RX_BW_39_0;
+            } else if(fabsf(rxBw - 46.9f) <= 0.001f) {
+              rxBandwidth = RADIOLIB_SX126X_GFSK_RX_BW_46_9;
+            } else if(fabsf(rxBw - 58.6f) <= 0.001f) {
+              rxBandwidth = RADIOLIB_SX126X_GFSK_RX_BW_58_6;
+            } else if(fabsf(rxBw - 78.2f) <= 0.001f) {
+              rxBandwidth = RADIOLIB_SX126X_GFSK_RX_BW_78_2;
+            } else if(fabsf(rxBw - 93.8f) <= 0.001f) {
+              rxBandwidth = RADIOLIB_SX126X_GFSK_RX_BW_93_8;
+            } else if(fabsf(rxBw - 117.3f) <= 0.001f) {
+              rxBandwidth = RADIOLIB_SX126X_GFSK_RX_BW_117_3;
+            } else if(fabsf(rxBw - 156.2f) <= 0.001f) {
+              rxBandwidth = RADIOLIB_SX126X_GFSK_RX_BW_156_2;
+            } else if(fabsf(rxBw - 187.2f) <= 0.001f) {
+              rxBandwidth = RADIOLIB_SX126X_GFSK_RX_BW_187_2;
+            } else if(fabsf(rxBw - 234.3f) <= 0.001f) {
+              rxBandwidth = RADIOLIB_SX126X_GFSK_RX_BW_234_3;
+            } else if(fabsf(rxBw - 312.0f) <= 0.001f) {
+              rxBandwidth = RADIOLIB_SX126X_GFSK_RX_BW_312_0;
+            } else if(fabsf(rxBw - 373.6f) <= 0.001f) {
+              rxBandwidth = RADIOLIB_SX126X_GFSK_RX_BW_373_6;
+            } else if(fabsf(rxBw - 467.0f) <= 0.001f) {
+              rxBandwidth = RADIOLIB_SX126X_GFSK_RX_BW_467_0;
+            }
+          
+            const uint8_t data[8] = { RADIOLIB_SX126X_CMD_SET_MODULATION_PARAMS,
+              (uint8_t)((brRaw >> 16) & 0xFF), (uint8_t)((brRaw >> 8) & 0xFF), (uint8_t)(brRaw & 0xFF),
+              (uint8_t) pulseShape, (uint8_t) rxBandwidth,
+              (uint8_t)((freqDevRaw >> 16) & 0xFF), (uint8_t)((freqDevRaw >> 8) & 0xFF), (uint8_t)(freqDevRaw & 0xFF)
+            };
+
+            return(this->delegate_->transfer(data, this->rx_buffer, 9));
+          }
+
+          int16_t Sx126XSpiComponent::setCurrentLimit(float currentLimit) {
+
+            // calculate raw value
+            uint8_t rawLimit = (uint8_t)(currentLimit / 2.5f);
+          
+            // update register
+            const uint8_t data[] = { 
+              RADIOLIB_SX126X_CMD_WRITE_REGISTER,
+              RADIOLIB_SX126X_REG_OCP_CONFIGURATION >> 8 & 0xff, RADIOLIB_SX126X_REG_OCP_CONFIGURATION & 0xff,
+              rawLimit
+            };
+
+            return(this->delegate_->transfer(data, this->rx_buffer, 4));
+          }
+
+        }  // namespace sx126x_spi
 }  // namespace esphome
+
+/* The sync word for Wireless M-Bus (wM-Bus) in S1 mode is 0x547696. This corresponds to the S-mode sync word 000111011010010110, preceded by three repetitions of (01) preamble bits. The sync word length is set to 24 bits, and data transmission uses Manchester encoding with MSB first
+*/

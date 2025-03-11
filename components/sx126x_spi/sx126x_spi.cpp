@@ -196,6 +196,7 @@ namespace esphome {
             this->delegate_->begin_transaction();
             this->delegate_->transfer(command, response, length);
             this->delegate_->end_transaction();
+            return(0);
           }
 
           int16_t Sx126XSpiComponent::standby(uint8_t mode) {

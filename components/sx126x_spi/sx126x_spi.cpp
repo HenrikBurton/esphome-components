@@ -200,12 +200,12 @@ namespace esphome {
           }
 
           int16_t Sx126XSpiComponent::standby(uint8_t mode) {
-            uint8_t data[2] = { RADIOLIB_SX126X_CMD_SET_STANDBY, mode };
+            uint8_t data[] = { RADIOLIB_SX126X_CMD_SET_STANDBY, mode };
             return(sx126xcommand(data, this->rx_buffer, 2));
           }
 
           int16_t Sx126XSpiComponent::setBufferBaseAddress(uint8_t txBaseAddress, uint8_t rxBaseAddress) {
-            const uint8_t data[] = { RADIOLIB_SX126X_CMD_SET_BUFFER_BASE_ADDRESS, 0, txBaseAddress, rxBaseAddress };
+            uint8_t data[] = { RADIOLIB_SX126X_CMD_SET_BUFFER_BASE_ADDRESS, 0, txBaseAddress, rxBaseAddress };
             return(sx126xcommand(data, this->rx_buffer, 4));
           }
 

@@ -492,23 +492,23 @@ namespace esphome {
                 void led_blink();
                 void led_handler();
                 void sx126xcommand(uint8_t*, uint8_t*, uint32_t);
-                uint16_t standby();
-                uint16_t setBufferBaseAddress(uint8_t, uint8_t);
-                uint16_t setPacketType(uint8_t);
-                uint16_t setFallbackeMode(uint8_t);
-                uint16_t setCadParams();
-                uint16_t clearIrqStatus(uint8_t);
-                uint16_t setDioIrqParams(uint8_t, uint8_t, uint8_t, uint8_t);
-                uint16_t setCalibration(uint8_t);
-                uint16_t setRegulatorMode(uint8_t); // RADIOLIB_SX126X_REGULATOR_DC_DC
-                uint16_t setModulationParams(float, float , float, uint8_t)
-                uint16_t setCurrentLimit(float);
-                uint16_t setPacketParams(uint8_t, uint8_t, uint8_t, uint8_t, uint8_t, uint8_t, uint8_t, uint8_t);
-                uint16_t setSyncWord();
-                uint16_t setDio2AsRfSwitch(uint8_t);
+                int16_t standby();
+                int16_t setBufferBaseAddress(uint8_t, uint8_t);
+                int16_t setPacketType(uint8_t);
+                int16_t setFallbackeMode(uint8_t);
+                int16_t setCadParams();
+                int16_t clearIrqStatus(uint8_t);
+                int16_t setDioIrqParams(uint8_t, uint8_t, uint8_t, uint8_t);
+                int16_t setCalibration(uint8_t);
+                int16_t setRegulatorMode(uint8_t); // RADIOLIB_SX126X_REGULATOR_DC_DC
+                int16_t setModulationParams(float, float , float, uint8_t);
+                int16_t setCurrentLimit(float);
+                int16_t setPacketParams(uint8_t, uint8_t, uint8_t, uint8_t, uint8_t, uint8_t, uint8_t, uint8_t);
+                int16_t setSyncWord();
+                int16_t setDio2AsRfSwitch(uint8_t);
                 uint16_t sec_ticker{0};
                 uint8_t rx_buffer[100];
-                uint16_t state;
+                int16_t state;
         };
 
     }  // namespace sx126x_spi

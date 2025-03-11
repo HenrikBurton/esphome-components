@@ -39,7 +39,7 @@ namespace esphome {
 
             // Setup device for FSK
 
-            state = standby();
+            state = standby(RADIOLIB_SX126X_STANDBY_RC);
 
             //state = setTCXO(tcxoVoltage);
 
@@ -205,17 +205,17 @@ namespace esphome {
 
           int16_t Sx126XSpiComponent::setBufferBaseAddress(uint8_t txBaseAddress, uint8_t rxBaseAddress) {
             const uint8_t data[] = { RADIOLIB_SX126X_CMD_SET_BUFFER_BASE_ADDRESS, 0, txBaseAddress, rxBaseAddress };
-            return(this->delegate_->transfer(data, this->rx_buffer, 4);
+            return(this->delegate_->transfer(data, this->rx_buffer, 4));
           }
 
           int16_t Sx126XSpiComponent::setPacketType(uint8_t type) {
             const uint8_t data[] = { RADIOLIB_SX126X_CMD_SET_PACKET_TYPE, type };
-            return(this->delegate_->transfer(data, this->rx_buffer, 2);
+            return(this->delegate_->transfer(data, this->rx_buffer, 2));
           }
 
           int16_t Sx126XSpiComponent::setFallbackMode(uint8_t mode) {
             const uint8_t data[] = { RADIOLIB_SX126X_CMD_SET_RX_TX_FALLBACK_MODE, mode };
-            return(this->delegate_->transfer(data, this->rx_buffer, 2);
+            return(this->delegate_->transfer(data, this->rx_buffer, 2));
           }
 
           int16_t Sx126XSpiComponent::setCadParams() {
@@ -229,12 +229,12 @@ namespace esphome {
                                      0x00
             };
 
-            return(this->delegate_->transfer(data, this->rx_buffer, 8);
+            return(this->delegate_->transfer(data, this->rx_buffer, 8));
           }
 
           int16_t Sx126XSpiComponent::clearIrqStatus(uint16_t clearIrqParams) {
             const uint8_t data[] = { RADIOLIB_SX126X_CMD_CLEAR_IRQ_STATUS, (uint8_t)((clearIrqParams >> 8) & 0xFF), (uint8_t)(clearIrqParams & 0xFF) };
-            return(this->delegate_->transfer(data, this->rx_buffer, 3);
+            return(this->delegate_->transfer(data, this->rx_buffer, 3));
           }
 
           int16_t Sx126XSpiComponent::setDioIrqParams(uint16_t irqMask, uint16_t dio1Mask, uint16_t dio2Mask, uint16_t dio3Mask) {
@@ -244,12 +244,12 @@ namespace esphome {
                                (uint8_t)((dio2Mask >> 8) & 0xFF), (uint8_t)(dio2Mask & 0xFF),
                                (uint8_t)((dio3Mask >> 8) & 0xFF), (uint8_t)(dio3Mask & 0xFF)
             };
-            return(this->delegate_->transfer(data, this->rx_buffer, 9);
+            return(this->delegate_->transfer(data, this->rx_buffer, 9));
           }
 
           int16_t Sx126XSpiComponent::setCalibration(uint8_t type) {
             const uint8_t data[] = { RADIOLIB_SX126X_CMD_CALIBRATE, type };
-            return(this->delegate_->transfer(data, this->rx_buffer, 2);
+            return(this->delegate_->transfer(data, this->rx_buffer, 2));
           }
 
           int16_t Sx126XSpiComponent::setRegulatorMode(uint8_t mode) {

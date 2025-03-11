@@ -492,7 +492,7 @@ namespace esphome {
                 void led_blink();
                 void led_handler();
                 void sx126xcommand(uint8_t*, uint8_t*, uint32_t);
-                int16_t standby();
+                int16_t standby(uint8_t);
                 int16_t setBufferBaseAddress(uint8_t, uint8_t);
                 int16_t setPacketType(uint8_t);
                 int16_t setFallbackeMode(uint8_t);

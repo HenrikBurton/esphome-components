@@ -68,7 +68,6 @@ namespace esphome {
             
             state = setSyncWord();
 
-
             state = setDio2AsRfSwitch(RADIOLIB_SX126X_DIO2_AS_RF_SWITCH);
 
 

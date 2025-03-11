@@ -507,7 +507,7 @@ namespace esphome {
                 int16_t setSyncWord();
                 int16_t setDio2AsRfSwitch(uint8_t);
                 uint16_t sec_ticker{0};
-                uint8_t rx_buffer[100];
+                uint8_t rx_buffer[255];
                 int16_t state;
         };
 

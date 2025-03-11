@@ -212,7 +212,7 @@ namespace esphome {
               (uint8_t)((timeout >> 8) & 0xff),
               (uint8_t)(timeout & 0xff)
             };
-            return(sx126xcommand(data, this->rx_buffer, 2));
+            return(sx126xcommand(data, this->rx_buffer, 4));
           }
 
           int16_t Sx126XSpiComponent::setBufferBaseAddress(uint8_t txBaseAddress, uint8_t rxBaseAddress) {

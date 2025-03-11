@@ -223,7 +223,7 @@ namespace esphome {
             uint8_t data[] = { RADIOLIB_SX126X_CMD_SET_CAD_PARAMS,
                                RADIOLIB_SX126X_CAD_ON_8_SYMB,
                                9 + 13,
-                               RADOLIB_SX126X_CAD_PARAM_DET_MIN,
+                               RADIOLIB_SX126X_CAD_PARAM_DET_MIN,
                                RADIOLIB_SX126X_CAD_GOTO_STDBY,
                                0x00,
                                0x00,

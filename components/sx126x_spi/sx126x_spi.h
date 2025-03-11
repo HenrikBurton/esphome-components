@@ -495,13 +495,13 @@ namespace esphome {
                 int16_t standby(uint8_t);
                 int16_t setBufferBaseAddress(uint8_t, uint8_t);
                 int16_t setPacketType(uint8_t);
-                int16_t setFallbackeMode(uint8_t);
+                int16_t setFallbackMode(uint8_t);
                 int16_t setCadParams();
-                int16_t clearIrqStatus(uint8_t);
-                int16_t setDioIrqParams(uint8_t, uint8_t, uint8_t, uint8_t);
+                int16_t clearIrqStatus(uint16_t);
+                int16_t setDioIrqParams(uint16_t, uint16_t, uint16_t, uint16_t);
                 int16_t setCalibration(uint8_t);
                 int16_t setRegulatorMode(uint8_t); // RADIOLIB_SX126X_REGULATOR_DC_DC
-                int16_t setModulationParams(float, float , float, uint8_t);
+                int16_t setModulationParams(float, float , float, uint32_t);
                 int16_t setCurrentLimit(float);
                 int16_t setPacketParams(uint8_t, uint8_t, uint8_t, uint8_t, uint8_t, uint8_t, uint8_t, uint8_t);
                 int16_t setSyncWord();

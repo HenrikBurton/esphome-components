@@ -132,7 +132,7 @@ namespace esphome {
             this->led_handler();
 
             if ((millis() - this->sec_ticker) >= 1000) {
-                ESP_LOGD(TAG, "Blink! %d", this->sec_ticker);
+                ESP_LOGD(TAG, "Blink!");
                 this->sec_ticker = millis();
                 this->led_blink();
                 uint8_t cmd5[] = {0x12, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 };                        // GetStats

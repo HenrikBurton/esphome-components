@@ -503,7 +503,7 @@ namespace esphome {
                 int16_t setRegulatorMode(uint8_t); // RADIOLIB_SX126X_REGULATOR_DC_DC
                 int16_t setModulationParams(float, float , float, uint32_t);
                 int16_t setCurrentLimit(float);
-                int16_t setPacketParams(uint8_t, uint8_t, uint8_t, uint8_t, uint8_t, uint8_t, uint8_t, uint8_t);
+                int16_t setPacketParams(uint16_t, uint8_t, uint8_t, uint8_t, uint8_t, uint8_t, uint8_t, uint8_t);
                 int16_t setSyncWord();
                 int16_t setDio2AsRfSwitch(uint8_t);
                 uint16_t sec_ticker{0};

@@ -47,7 +47,7 @@ namespace esphome {
 
             state = setPacketType(RADIOLIB_SX126X_PACKET_TYPE_GFSK);
 
-            state = setFallbackeMode(RADIOLIB_SX126X_RX_TX_FALLBACK_MODE_STDBY_RC);
+            state = setFallbackMode(RADIOLIB_SX126X_RX_TX_FALLBACK_MODE_STDBY_RC);
 
             state = setCadParams();
 
@@ -264,7 +264,7 @@ namespace esphome {
             uint32_t brRaw = (uint32_t)((RADIOLIB_SX126X_CRYSTAL_FREQ * 1000000.0f * 32.0f) / (br * 1000.0f));
 
             // calculate raw frequency deviation value
-            uint32_t freqDevRaw = (uint32_t)(((FreqDev * 1000.0f) * (float)((uint32_t)(1) << 25)) / (RADIOLIB_SX126X_CRYSTAL_FREQ * 1000000.0f));
+            uint32_t freqDevRaw = (uint32_t)(((freqDev * 1000.0f) * (float)((uint32_t)(1) << 25)) / (RADIOLIB_SX126X_CRYSTAL_FREQ * 1000000.0f));
 
             // check allowed receiver bandwidth values
 

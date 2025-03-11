@@ -59,7 +59,7 @@ namespace esphome {
 
             state = setRegulatorMode(RADIOLIB_SX126X_REGULATOR_LDO); // RADIOLIB_SX126X_REGULATOR_DC_DC
 
-            state = setModulationParams(float br, float freqDev, 50000.0f, RADIOLIB_SX126X_GFSK_FILTER_NONE)
+            state = setModulationParams(868.3f, 50000.0f, 156.2f, RADIOLIB_SX126X_GFSK_FILTER_NONE);
 
             state = setCurrentLimit(60.0);
 

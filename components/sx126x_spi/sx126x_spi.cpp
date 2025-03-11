@@ -70,6 +70,8 @@ namespace esphome {
 
             state = setDio2AsRfSwitch(RADIOLIB_SX126X_DIO2_AS_RF_SWITCH);
 
+            state = setRx(0x000000);
+
 
 
 /*
@@ -201,6 +203,15 @@ namespace esphome {
 
           int16_t Sx126XSpiComponent::standby(uint8_t mode) {
             uint8_t data[] = { RADIOLIB_SX126X_CMD_SET_STANDBY, mode };
+            return(sx126xcommand(data, this->rx_buffer, 2));
+          }
+
+          int16_t Sx126XSpiComponent::setRx(uint32_t timeout) {
+            uint8_t data[] = { RADIOLIB_SX126X_CMD_SET_RX, 
+              (uint8_t)((timeout >> 16) & 0xff),
+              (uint8_t)((timeout >> 8) & 0xff),
+              (uint8_t)(timeout & 0xff)
+            };
             return(sx126xcommand(data, this->rx_buffer, 2));
           }
 

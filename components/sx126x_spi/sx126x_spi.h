@@ -506,7 +506,7 @@ namespace esphome {
                 int16_t setPacketParams(uint16_t, uint8_t, uint8_t, uint8_t, uint8_t, uint8_t, uint8_t, uint8_t);
                 int16_t setSyncWord();
                 int16_t setDio2AsRfSwitch(uint8_t);
-                uint16_t sec_ticker{0};
+                uint32_t sec_ticker{0};
                 uint8_t rx_buffer[255];
                 int16_t state;
         };

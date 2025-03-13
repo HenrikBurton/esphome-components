@@ -60,17 +60,17 @@ namespace esphome {
             state = setPacketParams(16, RADIOLIB_SX126X_GFSK_PREAMBLE_DETECT_8, RADIOLIB_SX126X_GFSK_CRC_OFF, 24, RADIOLIB_SX126X_GFSK_ADDRESS_FILT_OFF, 
               RADIOLIB_SX126X_GFSK_WHITENING_OFF, RADIOLIB_SX126X_PACKET_TYPE_GFSK, RADIOLIB_SX126X_GFSK_PACKET_VARIABLE);
             
-            state = setRegulatorMode(RADIOLIB_SX126X_REGULATOR_LDO); // RADIOLIB_SX126X_REGULATOR_DC_DC
-           
-            state = setCurrentLimit(60.0);
+            state = setDioIrqParams(RADIOLIB_SX126X_IRQ_RX_DONE, RADIOLIB_SX126X_IRQ_RX_DONE, 0, 0);
 
             state = setSyncWord();
 
-            state = clearIrqStatus(RADIOLIB_SX126X_IRQ_ALL);
+            //state = setRegulatorMode(RADIOLIB_SX126X_REGULATOR_LDO); // RADIOLIB_SX126X_REGULATOR_DC_DC
+           
+            //state = setCurrentLimit(60.0);
 
-            state = setDioIrqParams(RADIOLIB_SX126X_IRQ_ALL, RADIOLIB_SX126X_IRQ_ALL, 0, 0);
-            
-            state = setDio2AsRfSwitch(RADIOLIB_SX126X_DIO2_AS_RF_SWITCH);
+            //state = clearIrqStatus(RADIOLIB_SX126X_IRQ_ALL);
+
+            //state = setDio2AsRfSwitch(RADIOLIB_SX126X_DIO2_AS_RF_SWITCH);
 
             state = setRx(0x000000);
 

@@ -51,25 +51,25 @@ namespace esphome {
 
             state = setBufferBaseAddress(0x00, 0x00);
 
-            state = setCadParams();
+            //state = setCadParams();
 
-            state = clearIrqStatus(RADIOLIB_SX126X_IRQ_ALL);
-
-            state = setDioIrqParams(RADIOLIB_SX126X_IRQ_ALL, RADIOLIB_SX126X_IRQ_ALL, 0, 0);
-
-            state = setCalibration(RADIOLIB_SX126X_CALIBRATE_ALL);
-
-            state = setRegulatorMode(RADIOLIB_SX126X_REGULATOR_LDO); // RADIOLIB_SX126X_REGULATOR_DC_DC
+            //state = setCalibration(RADIOLIB_SX126X_CALIBRATE_ALL);
 
             state = setModulationParams(19.2f, 50000.0f, 156.2f, RADIOLIB_SX126X_GFSK_FILTER_NONE);
-           
-            state = setCurrentLimit(60.0);
 
             state = setPacketParams(16, RADIOLIB_SX126X_GFSK_PREAMBLE_DETECT_8, RADIOLIB_SX126X_GFSK_CRC_OFF, 24, RADIOLIB_SX126X_GFSK_ADDRESS_FILT_OFF, 
               RADIOLIB_SX126X_GFSK_WHITENING_OFF, RADIOLIB_SX126X_PACKET_TYPE_GFSK, RADIOLIB_SX126X_GFSK_PACKET_VARIABLE);
             
+            state = setRegulatorMode(RADIOLIB_SX126X_REGULATOR_LDO); // RADIOLIB_SX126X_REGULATOR_DC_DC
+           
+            state = setCurrentLimit(60.0);
+
             state = setSyncWord();
 
+            state = clearIrqStatus(RADIOLIB_SX126X_IRQ_ALL);
+
+            state = setDioIrqParams(RADIOLIB_SX126X_IRQ_ALL, RADIOLIB_SX126X_IRQ_ALL, 0, 0);
+            
             state = setDio2AsRfSwitch(RADIOLIB_SX126X_DIO2_AS_RF_SWITCH);
 
             state = setRx(0x000000);

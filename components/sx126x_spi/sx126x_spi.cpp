@@ -51,15 +51,15 @@ namespace esphome {
 
             state = setCadParams();
 
-            state = clearIrqStatus(0);
+            state = clearIrqStatus(RADIOLIB_SX126X_IRQ_ALL);
 
-            state = setDioIrqParams(RADIOLIB_SX126X_IRQ_NONE, RADIOLIB_SX126X_IRQ_NONE, 0, 0);
+            state = setDioIrqParams(RADIOLIB_SX126X_IRQ_ALL, RADIOLIB_SX126X_IRQ_ALL, 0, 0);
 
             state = setCalibration(RADIOLIB_SX126X_CALIBRATE_ALL);
 
             state = setRegulatorMode(RADIOLIB_SX126X_REGULATOR_LDO); // RADIOLIB_SX126X_REGULATOR_DC_DC
 
-            state = setModulationParams(868.3f, 50000.0f, 156.2f, RADIOLIB_SX126X_GFSK_FILTER_NONE);
+            state = setModulationParams(869.8f, 50000.0f, 156.2f, RADIOLIB_SX126X_GFSK_FILTER_NONE);
 
             state = setCurrentLimit(60.0);
 
@@ -195,6 +195,9 @@ namespace esphome {
           }
 
           int16_t Sx126XSpiComponent::sx126xcommand(uint8_t *command, uint8_t *response, uint32_t length) {
+            while(this->busy_pin_->digital_read()){
+              delay(1);
+            }
             this->delegate_->begin_transaction();
             this->delegate_->transfer(command, response, length);
             this->delegate_->end_transaction();
@@ -216,8 +219,8 @@ namespace esphome {
           }
 
           int16_t Sx126XSpiComponent::setBufferBaseAddress(uint8_t txBaseAddress, uint8_t rxBaseAddress) {
-            uint8_t data[] = { RADIOLIB_SX126X_CMD_SET_BUFFER_BASE_ADDRESS, 0, txBaseAddress, rxBaseAddress };
-            return(sx126xcommand(data, this->rx_buffer, 4));
+            uint8_t data[] = { RADIOLIB_SX126X_CMD_SET_BUFFER_BASE_ADDRESS, txBaseAddress, rxBaseAddress };
+            return(sx126xcommand(data, this->rx_buffer, 3));
           }
 
           int16_t Sx126XSpiComponent::setPacketType(uint8_t type) {

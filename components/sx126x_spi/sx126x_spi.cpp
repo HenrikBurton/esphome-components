@@ -45,7 +45,7 @@ namespace esphome {
 
             state = setPacketType(RADIOLIB_SX126X_PACKET_TYPE_GFSK);
 
-            state = setRfFrequency(869.8f);
+            state = setRfFrequency(868.0f);
 
             state = setFallbackMode(RADIOLIB_SX126X_RX_TX_FALLBACK_MODE_STDBY_RC);
 

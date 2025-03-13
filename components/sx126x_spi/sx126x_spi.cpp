@@ -43,13 +43,13 @@ namespace esphome {
 
             //state = setTCXO(tcxoVoltage);
 
-            state = setBufferBaseAddress(0x00, 0x00);
-
             state = setPacketType(RADIOLIB_SX126X_PACKET_TYPE_GFSK);
 
-            state = setRfFrequency(869.8f)
+            state = setRfFrequency(869.8f);
 
             state = setFallbackMode(RADIOLIB_SX126X_RX_TX_FALLBACK_MODE_STDBY_RC);
+
+            state = setBufferBaseAddress(0x00, 0x00);
 
             state = setCadParams();
 
@@ -218,7 +218,7 @@ namespace esphome {
             uint32_t freqRaw = (freq * (uint32_t(1) << RADIOLIB_SX126X_DIV_EXPONENT)) / RADIOLIB_SX126X_CRYSTAL_FREQ;
 
             uint8_t data[] = { RADIOLIB_SX126X_CMD_SET_RF_FREQUENCY, 
-              (uint8_t)((timeout >> 24) & 0xff),
+              (uint8_t)((freqRaw >> 24) & 0xff),
               (uint8_t)((freqRaw >> 16) & 0xff),
               (uint8_t)((freqRaw >> 8) & 0xff),
               (uint8_t)(freqRaw & 0xff)

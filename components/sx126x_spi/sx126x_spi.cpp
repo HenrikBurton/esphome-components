@@ -47,6 +47,8 @@ namespace esphome {
 
             state = setPacketType(RADIOLIB_SX126X_PACKET_TYPE_GFSK);
 
+            state = setRfFrequency(869.8f)
+
             state = setFallbackMode(RADIOLIB_SX126X_RX_TX_FALLBACK_MODE_STDBY_RC);
 
             state = setCadParams();
@@ -59,8 +61,8 @@ namespace esphome {
 
             state = setRegulatorMode(RADIOLIB_SX126X_REGULATOR_LDO); // RADIOLIB_SX126X_REGULATOR_DC_DC
 
-            state = setModulationParams(869.8f, 50000.0f, 156.2f, RADIOLIB_SX126X_GFSK_FILTER_NONE);
-
+            state = setModulationParams(19.2f, 50000.0f, 156.2f, RADIOLIB_SX126X_GFSK_FILTER_NONE);
+           
             state = setCurrentLimit(60.0);
 
             state = setPacketParams(16, RADIOLIB_SX126X_GFSK_PREAMBLE_DETECT_8, RADIOLIB_SX126X_GFSK_CRC_OFF, 24, RADIOLIB_SX126X_GFSK_ADDRESS_FILT_OFF, 
@@ -195,6 +197,8 @@ namespace esphome {
           }
 
           int16_t Sx126XSpiComponent::sx126xcommand(uint8_t *command, uint8_t *response, uint32_t length) {
+            
+            // Wait until device is not BUSY
             while(this->busy_pin_->digital_read()){
               delay(1);
             }
@@ -209,6 +213,19 @@ namespace esphome {
             return(sx126xcommand(data, this->rx_buffer, 2));
           }
 
+          int16_t Sx126XSpiComponent::setRfFrequency(float freq) {
+
+            uint32_t freqRaw = (freq * (uint32_t(1) << RADIOLIB_SX126X_DIV_EXPONENT)) / RADIOLIB_SX126X_CRYSTAL_FREQ;
+
+            uint8_t data[] = { RADIOLIB_SX126X_CMD_SET_RF_FREQUENCY, 
+              (uint8_t)((timeout >> 24) & 0xff),
+              (uint8_t)((freqRaw >> 16) & 0xff),
+              (uint8_t)((freqRaw >> 8) & 0xff),
+              (uint8_t)(freqRaw & 0xff)
+            };
+            return(sx126xcommand(data, this->rx_buffer, 5));
+          }
+          
           int16_t Sx126XSpiComponent::setRx(uint32_t timeout) {
             uint8_t data[] = { RADIOLIB_SX126X_CMD_SET_RX, 
               (uint8_t)((timeout >> 16) & 0xff),

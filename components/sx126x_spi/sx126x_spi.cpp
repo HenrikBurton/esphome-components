@@ -58,8 +58,15 @@ namespace esphome {
             // bitrate, freqDeviation, Bandwidth, PulseShape
             state = setModulationParams(32.768f, 50.0f, 156.2f, RADIOLIB_SX126X_GFSK_FILTER_NONE);
 
-            state = setPacketParams(16, RADIOLIB_SX126X_GFSK_PREAMBLE_DETECT_8, RADIOLIB_SX126X_GFSK_CRC_OFF, 24, RADIOLIB_SX126X_GFSK_ADDRESS_FILT_OFF, 
-              RADIOLIB_SX126X_GFSK_WHITENING_OFF, RADIOLIB_SX126X_PACKET_TYPE_GFSK, RADIOLIB_SX126X_GFSK_PACKET_VARIABLE);
+            state = setPacketParams(16, 
+                                    RADIOLIB_SX126X_GFSK_PREAMBLE_DETECT_8, 
+                                    24, 
+                                    RADIOLIB_SX126X_GFSK_ADDRESS_FILT_OFF, 
+                                    RADIOLIB_SX126X_GFSK_PACKET_VARIABLE, 
+                                    0xf0,
+                                    RADIOLIB_SX126X_GFSK_CRC_OFF, 
+                                    RADIOLIB_SX126X_GFSK_WHITENING_OFF
+                                  );
             
             state = setDioIrqParams(RADIOLIB_SX126X_IRQ_RX_DONE, RADIOLIB_SX126X_IRQ_RX_DONE, 0, 0);
 
@@ -370,12 +377,20 @@ namespace esphome {
             return(sx126xcommand(data, this->rx_buffer, 4));
           }
 
-          int16_t Sx126XSpiComponent::setPacketParams(uint16_t preambleLen, uint8_t preambleDetectorLen, uint8_t crcType, uint8_t syncWordLen, uint8_t addrCmp, uint8_t whiten, uint8_t packType, uint8_t payloadLen) {
+          int16_t Sx126XSpiComponent::setPacketParams(uint16_t preambleLen, 
+                                                      uint8_t preambleDetectorLen, 
+                                                      uint8_t syncWordLen, 
+                                                      uint8_t addrComp, 
+                                                      uint8_t packType, 
+                                                      uint8_t payloadLen,
+                                                      uint8_t crcType, 
+                                                      uint8_t whiten
+                                                    ) {
 
             uint8_t data[] = {
               RADIOLIB_SX126X_CMD_SET_PACKET_PARAMS,
               (uint8_t)((preambleLen >> 8) & 0xFF), (uint8_t)(preambleLen & 0xFF),
-              preambleDetectorLen, syncWordLen, addrCmp,
+              preambleDetectorLen, syncWordLen, addrComp,
               packType, payloadLen, crcType, whiten
             };
             return(sx126xcommand(data, this->rx_buffer, 10));

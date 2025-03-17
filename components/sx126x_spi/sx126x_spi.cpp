@@ -45,7 +45,7 @@ namespace esphome {
 
             state = setPacketType(RADIOLIB_SX126X_PACKET_TYPE_GFSK);
 
-            state = setRfFrequency(868.0f);
+            state = setRfFrequency(868.950f);
 
             state = setFallbackMode(RADIOLIB_SX126X_RX_TX_FALLBACK_MODE_STDBY_RC);
 
@@ -55,7 +55,8 @@ namespace esphome {
 
             //state = setCalibration(RADIOLIB_SX126X_CALIBRATE_ALL);
 
-            state = setModulationParams(19.2f, 50000.0f, 156.2f, RADIOLIB_SX126X_GFSK_FILTER_NONE);
+            // bitrate, freqDeviation, Bandwidth, PulseShape
+            state = setModulationParams(32.768f, 50.0f, 156.2f, RADIOLIB_SX126X_GFSK_FILTER_NONE);
 
             state = setPacketParams(16, RADIOLIB_SX126X_GFSK_PREAMBLE_DETECT_8, RADIOLIB_SX126X_GFSK_CRC_OFF, 24, RADIOLIB_SX126X_GFSK_ADDRESS_FILT_OFF, 
               RADIOLIB_SX126X_GFSK_WHITENING_OFF, RADIOLIB_SX126X_PACKET_TYPE_GFSK, RADIOLIB_SX126X_GFSK_PACKET_VARIABLE);
@@ -299,7 +300,7 @@ namespace esphome {
 
             // check allowed receiver bandwidth values
 
-            uint32_t rxBandwidth = RADIOLIB_SX126X_GFSK_RX_BW_467_0;
+            uint8_t rxBandwidth = RADIOLIB_SX126X_GFSK_RX_BW_467_0;
 
             if(fabsf(rxBw - 4.8f) <= 0.001f) {
               rxBandwidth = RADIOLIB_SX126X_GFSK_RX_BW_4_8;

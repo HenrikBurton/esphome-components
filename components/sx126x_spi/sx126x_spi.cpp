@@ -80,7 +80,7 @@ namespace esphome {
 
             //state = setDio2AsRfSwitch(RADIOLIB_SX126X_DIO2_AS_RF_SWITCH);
 
-            state = standby(RADIOLIB_SX126X_STANDBY_XOSC);
+            state = standby(RADIOLIB_SX126X_STANDBY_RC);
 
             state = setRx(0xffffff);
 

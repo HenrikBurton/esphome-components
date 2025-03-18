@@ -238,7 +238,7 @@ namespace esphome {
 
           int16_t Sx126XSpiComponent::setFs() {
             uint8_t data[] = { RADIOLIB_SX126X_CMD_SET_FS };
-            return(sx126xcommand(data, this->rx_buffer, 4));
+            return(sx126xcommand(data, this->rx_buffer, 1));
           }
           
           int16_t Sx126XSpiComponent::setRx(uint32_t timeout) {

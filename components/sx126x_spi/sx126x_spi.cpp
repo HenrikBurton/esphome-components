@@ -47,16 +47,16 @@ namespace esphome {
 
             state = setRfFrequency(868.950f);
 
-            state = setFallbackMode(RADIOLIB_SX126X_RX_TX_FALLBACK_MODE_STDBY_RC);
-
             state = setBufferBaseAddress(0x00, 0x00);
+
+            //state = setFallbackMode(RADIOLIB_SX126X_RX_TX_FALLBACK_MODE_STDBY_RC);
 
             //state = setCadParams();
 
             //state = setCalibration(RADIOLIB_SX126X_CALIBRATE_ALL);
 
             // bitrate, freqDeviation, Bandwidth, PulseShape
-            state = setModulationParams(32.768f, 50.0f, 156.2f, RADIOLIB_SX126X_GFSK_FILTER_NONE);
+            state = setModulationParams(19.2f, 50.0f, 156.2f, RADIOLIB_SX126X_GFSK_FILTER_NONE);
 
             state = setPacketParams(16, 
                                     RADIOLIB_SX126X_GFSK_PREAMBLE_DETECT_8, 

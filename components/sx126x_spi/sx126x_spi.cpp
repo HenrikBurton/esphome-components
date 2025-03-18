@@ -82,8 +82,8 @@ namespace esphome {
 
             state = standby(RADIOLIB_SX126X_STANDBY_RC);
 
-            state = setRx(0xffffff);
-
+            //state = setRx(0xffffff);
+            state = setFs();
 
 
 /*
@@ -234,6 +234,11 @@ namespace esphome {
               (uint8_t)(freqRaw & 0xff)
             };
             return(sx126xcommand(data, this->rx_buffer, 5));
+          }
+
+          int16_t Sx126XSpiComponent::setFs() {
+            uint8_t data[] = { RADIOLIB_SX126X_CMD_SET_FS };
+            return(sx126xcommand(data, this->rx_buffer, 4));
           }
           
           int16_t Sx126XSpiComponent::setRx(uint32_t timeout) {

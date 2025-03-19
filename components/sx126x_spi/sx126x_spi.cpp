@@ -69,7 +69,7 @@ namespace esphome {
                                   );
             
 //            state = setDioIrqParams(RADIOLIB_SX126X_IRQ_RX_DONE, RADIOLIB_SX126X_IRQ_RX_DONE, 0, 0);
-            state = setDioIrqParams(RADIOLIB_SX126X_IRQ_RX_ALL, RADIOLIB_SX126X_IRQ_RX_ALL, 0, 0);
+            state = setDioIrqParams(RADIOLIB_SX126X_IRQ_ALL, RADIOLIB_SX126X_IRQ_ALL, 0, 0);
 
             state = setSyncWord();
 

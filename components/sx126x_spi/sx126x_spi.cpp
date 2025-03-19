@@ -84,8 +84,8 @@ namespace esphome {
 
             state = standby(RADIOLIB_SX126X_STANDBY_XOSC);
 
-            //state = setRx(0xffffff);
-            state = setFs();
+            state = setRx(0xffffff);
+            //state = setFs();
 
 
 /*

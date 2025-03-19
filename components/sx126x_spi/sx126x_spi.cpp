@@ -97,14 +97,14 @@ namespace esphome {
         void Sx126XSpiComponent::loop() {
             this->led_handler();
 
-            irq = this->reset_pin_->digital_read();
+            uint32_t irq = this->reset_pin_->digital_read();
 
             if(irq) {
-              irqStatus = getIrqStatus();
+              uint16_t irqStatus = getIrqStatus();
 
               ESP_LOGD(TAG, "IRQ: %04", irqStatus);
 
-              status = clearIrqStatus(RADIOLIB_SX126X_IRQ_ALL);
+              uint16_t status = clearIrqStatus(RADIOLIB_SX126X_IRQ_ALL);
 
               this->led_blink();
             }

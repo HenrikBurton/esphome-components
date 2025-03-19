@@ -6,7 +6,8 @@ from esphome.const import (
     CONF_ID,
     CONF_NAME,
     CONF_BUSY_PIN,
-    CONF_RESET_PIN
+    CONF_RESET_PIN,
+    CONF_IRQ_PIN
 )
 
 
@@ -32,6 +33,7 @@ CONFIG_SCHEMA = (
         cv.Optional(CONF_RF_FREQUENCY,   default=868.950):     cv.float_range(min=300, max=928),
         cv.Optional(CONF_BUSY_PIN):                            pins.gpio_input_pin_schema,
         cv.Optional(CONF_RESET_PIN):                           pins.gpio_output_pin_schema,
+        cv.Optional(CONF_IRQ_PIN):                             pins.gpio_input_pin_schema,
         cv.Optional(CONF_LOG_ALL,        default=False):       cv.boolean,
 
         cv.Optional(CONF_LED_PIN):                             pins.gpio_output_pin_schema,
@@ -56,6 +58,10 @@ async def to_code(config):
         reset_pin = await cg.gpio_pin_expression(config[CONF_RESET_PIN])
         cg.add(var.set_reset_pin(reset_pin))
     
+    if CONF_IRQ_PIN in config:
+        reset_pin = await cg.gpio_pin_expression(config[CONF_IRQ_PIN])
+        cg.add(var.set_irq_pin(irq_pin))
+
     if CONF_LED_PIN in config:
         led_pin = await cg.gpio_pin_expression(config[CONF_LED_PIN])
         cg.add(var.set_led_pin(led_pin))

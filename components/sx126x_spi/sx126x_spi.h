@@ -474,6 +474,7 @@ namespace esphome {
                 void set_log_all(bool log_all) { this->log_all_ = log_all; }
                 void set_busy_pin(GPIOPin *busy_pin) { this->busy_pin_ = busy_pin; }
                 void set_reset_pin(GPIOPin *reset_pin) { this->reset_pin_ = reset_pin; }
+                void set_irq_pin(GPIOPin *irq_pin) { this->irq_pin_ = irq_pin; }
 
                 float get_setup_priority() const override;
 
@@ -485,6 +486,7 @@ namespace esphome {
                 bool log_all_;
                 GPIOPin *busy_pin_{nullptr};
                 GPIOPin *reset_pin_{nullptr};
+                GPIOPin *irq_pin_{nullptr};
                 GPIOPin *led_pin_{nullptr};
                 uint32_t led_blink_time_{0};
                 uint32_t led_on_millis_{0};

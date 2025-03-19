@@ -28,6 +28,11 @@ namespace esphome {
               ESP_LOGD(TAG, "RESET pin setup!");
             }
 
+            if (this->irq_pin_ != nullptr) {
+              this->irq_pin_->setup();
+              ESP_LOGD(TAG, "IRQ pin setup!");
+            }
+
             if (this->led_pin_ != nullptr) {
                 this->led_pin_->setup();
                 this->led_pin_->digital_write(false);
@@ -125,11 +130,18 @@ namespace esphome {
             }
 
             if (this->reset_pin_ != nullptr) {
-              ESP_LOGCONFIG(TAG, "  RESET:");
-              LOG_PIN("    Pin: ", this->reset_pin_);
-          } else {
-              ESP_LOGCONFIG(TAG, "   No RESET pin");
-          }
+                ESP_LOGCONFIG(TAG, "  RESET:");
+                LOG_PIN("    Pin: ", this->reset_pin_);
+           } else {
+                ESP_LOGCONFIG(TAG, "   No RESET pin");
+            }
+          
+            if (this->irq_pin_ != nullptr) {
+                ESP_LOGCONFIG(TAG, "  IRQ:");
+                LOG_PIN("    Pin: ", this->irq_pin_);
+            } else {
+                ESP_LOGCONFIG(TAG, "   No IRQ pin");
+            }
         }
 
         float Sx126XSpiComponent::get_setup_priority() const { return setup_priority::DATA; }

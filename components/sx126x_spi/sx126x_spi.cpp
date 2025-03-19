@@ -97,7 +97,7 @@ namespace esphome {
         void Sx126XSpiComponent::loop() {
             this->led_handler();
 
-            uint32_t irq = this->reset_pin_->digital_read();
+            uint32_t irq = this->irq_pin_->digital_read();
 
             if(irq) {
               uint16_t irqStatus = getIrqStatus();

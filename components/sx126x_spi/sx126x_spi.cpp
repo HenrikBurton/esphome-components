@@ -113,11 +113,16 @@ namespace esphome {
                   uint8_t cmd[] = { 0x1e, 0x00, 0x00, 
                                     0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 }; 
                   sx126xcommand(cmd, this->rx_buffer, 13);
-                  ESP_LOGD(TAG, "status: %02X %02X %02X %02X %02X", this->rx_buffer[3], 
+                  ESP_LOGD(TAG, "status: %02X %02X %02X %02X %02X %02X %02X %02X %02X %02X", this->rx_buffer[3], 
                                                                     this->rx_buffer[4],
                                                                     this->rx_buffer[5],
                                                                     this->rx_buffer[6],
-                                                                    this->rx_buffer[7]
+                                                                    this->rx_buffer[7],
+                                                                    this->rx_buffer[8],
+                                                                    this->rx_buffer[9],
+                                                                    this->rx_buffer[10],
+                                                                    this->rx_buffer[11],
+                                                                    this->rx_buffer[12]
                   );
               } 
 

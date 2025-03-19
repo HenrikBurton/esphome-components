@@ -97,6 +97,18 @@ namespace esphome {
         void Sx126XSpiComponent::loop() {
             this->led_handler();
 
+            irq = this->reset_pin_->digital_read();
+
+            if(irq) {
+              irqStatus = getIrqStatus();
+
+              ESP_LOGD(TAG, "IRQ: %04", irqStatus)
+
+              status = clearIrqStatus(RADIOLIB_SX126X_IRQ_ALL);
+
+              this->led_blink();
+            }
+/*
             if ((millis() - this->sec_ticker) >= 1000) {
                 ESP_LOGD(TAG, "Blink!");
                 this->sec_ticker = millis();
@@ -108,6 +120,7 @@ namespace esphome {
                                                         this->rx_buffer[4] << 8 | this->rx_buffer[5],
                                                         this->rx_buffer[6] << 8 | this->rx_buffer[7]);
             }
+*/
         }
 
         void Sx126XSpiComponent::dump_config() {
@@ -240,6 +253,11 @@ namespace esphome {
             return(sx126xcommand(data, this->rx_buffer, 8));
           }
 
+          int16_t Sx126XSpiComponent::getIrqStatus() {
+            uint8_t data[] = { RADIOLIB_SX126X_CMD_GET_IRQ_STATUS, 0x00, 0x00, 0x00 };
+            status = sx126xcommand(data, this->rx_buffer, 4)
+            return((this->rx_buffer[2] << 8) | this->rx_buffer[3])
+          }
           int16_t Sx126XSpiComponent::clearIrqStatus(uint16_t clearIrqParams) {
             uint8_t data[] = { RADIOLIB_SX126X_CMD_CLEAR_IRQ_STATUS, (uint8_t)((clearIrqParams >> 8) & 0xFF), (uint8_t)(clearIrqParams & 0xFF) };
             return(sx126xcommand(data, this->rx_buffer, 3));

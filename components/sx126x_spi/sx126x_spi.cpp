@@ -72,6 +72,8 @@ namespace esphome {
 
             state = setSyncWord();
 
+            state = setDIO3AsTCXOCtrl(RADIOLIB_SX126X_DIO3_OUTPUT_3_0, 64);  // Delay = 1 ms / 0.015625 ms = 64
+
             //state = setRegulatorMode(RADIOLIB_SX126X_REGULATOR_LDO); // RADIOLIB_SX126X_REGULATOR_DC_DC
            
             //state = setCurrentLimit(60.0);
@@ -292,6 +294,14 @@ namespace esphome {
                                (uint8_t)((dio3Mask >> 8) & 0xFF), (uint8_t)(dio3Mask & 0xFF)
             };
             return(sx126xcommand(data, this->rx_buffer, 9));
+          }
+          SetDIO3AsTCXOCtrl
+          int16_t Sx126XSpiComponent::setDIO3AsTCXOCtrl(uint8_t tcxoVoltage, uint32_t delay) {
+            uint8_t data[] = {RADIOLIB_SX126X_CMD_SET_DIO3_AS_TCXO_CTRL,
+                               tcxoVoltage,
+                               (uint8_t)((delay >> 24) & 0xFF), (uint8_t)((delay >> 16) & 0xFF), (uint_t)(delay & 0xff)
+            };
+            return(sx126xcommand(data, this->rx_buffer, 5));
           }
 
           int16_t Sx126XSpiComponent::setCalibration(uint8_t type) {

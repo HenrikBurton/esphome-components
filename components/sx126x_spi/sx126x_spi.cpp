@@ -299,7 +299,7 @@ namespace esphome {
           int16_t Sx126XSpiComponent::setDIO3AsTCXOCtrl(uint8_t tcxoVoltage, uint32_t delay) {
             uint8_t data[] = {RADIOLIB_SX126X_CMD_SET_DIO3_AS_TCXO_CTRL,
                                tcxoVoltage,
-                               (uint8_t)((delay >> 24) & 0xFF), (uint8_t)((delay >> 16) & 0xFF), (uint_t)(delay & 0xff)
+                               (uint8_t)((delay >> 24) & 0xFF), (uint8_t)((delay >> 16) & 0xFF), (uint8_t)(delay & 0xff)
             };
             return(sx126xcommand(data, this->rx_buffer, 5));
           }

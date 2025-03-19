@@ -503,7 +503,7 @@ namespace esphome {
                 int16_t setFallbackMode(uint8_t);
                 int16_t setCadParams();
                 int16_t clearIrqStatus(uint16_t);
-                int16_t getIrqStatus();
+                uint16_t getIrqStatus();
                 int16_t setDioIrqParams(uint16_t, uint16_t, uint16_t, uint16_t);
                 int16_t setDIO3AsTCXOCtrl(uint8_t, uint32_t);
                 int16_t setCalibration(uint8_t);

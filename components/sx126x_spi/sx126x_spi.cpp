@@ -253,11 +253,12 @@ namespace esphome {
             return(sx126xcommand(data, this->rx_buffer, 8));
           }
 
-          int16_t Sx126XSpiComponent::getIrqStatus() {
+          uint16_t Sx126XSpiComponent::getIrqStatus() {
             uint8_t data[] = { RADIOLIB_SX126X_CMD_GET_IRQ_STATUS, 0x00, 0x00, 0x00 };
-            uint16_t status = sx126xcommand(data, this->rx_buffer, 4)
-            return((this->rx_buffer[2] << 8) | this->rx_buffer[3])
+            uint16_t status = sx126xcommand(data, this->rx_buffer, 4);
+            return((uint16_t)(this->rx_buffer[2] << 8) | this->rx_buffer[3]);
           }
+
           int16_t Sx126XSpiComponent::clearIrqStatus(uint16_t clearIrqParams) {
             uint8_t data[] = { RADIOLIB_SX126X_CMD_CLEAR_IRQ_STATUS, (uint8_t)((clearIrqParams >> 8) & 0xFF), (uint8_t)(clearIrqParams & 0xFF) };
             return(sx126xcommand(data, this->rx_buffer, 3));

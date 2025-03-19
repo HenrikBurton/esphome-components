@@ -102,7 +102,7 @@ namespace esphome {
             if(irq) {
               irqStatus = getIrqStatus();
 
-              ESP_LOGD(TAG, "IRQ: %04", irqStatus)
+              ESP_LOGD(TAG, "IRQ: %04", irqStatus);
 
               status = clearIrqStatus(RADIOLIB_SX126X_IRQ_ALL);
 

@@ -59,7 +59,7 @@ async def to_code(config):
         cg.add(var.set_reset_pin(reset_pin))
     
     if CONF_IRQ_PIN in config:
-        reset_pin = await cg.gpio_pin_expression(config[CONF_IRQ_PIN])
+        irq_pin = await cg.gpio_pin_expression(config[CONF_IRQ_PIN])
         cg.add(var.set_irq_pin(irq_pin))
 
     if CONF_LED_PIN in config:

@@ -255,7 +255,7 @@ namespace esphome {
 
           int16_t Sx126XSpiComponent::getIrqStatus() {
             uint8_t data[] = { RADIOLIB_SX126X_CMD_GET_IRQ_STATUS, 0x00, 0x00, 0x00 };
-            status = sx126xcommand(data, this->rx_buffer, 4)
+            uint16_t status = sx126xcommand(data, this->rx_buffer, 4)
             return((this->rx_buffer[2] << 8) | this->rx_buffer[3])
           }
           int16_t Sx126XSpiComponent::clearIrqStatus(uint16_t clearIrqParams) {

@@ -65,7 +65,8 @@ namespace esphome {
 
             state = setPacketParams(16, 
                                     RADIOLIB_SX126X_GFSK_PREAMBLE_DETECT_8, 
-                                    24, 
+                                    //24, // Syncword length
+                                    8,
                                     RADIOLIB_SX126X_GFSK_ADDRESS_FILT_OFF, 
                                     RADIOLIB_SX126X_GFSK_PACKET_VARIABLE, 
                                     0xf0,
@@ -397,7 +398,8 @@ namespace esphome {
             uint8_t data[] = { 
               RADIOLIB_SX126X_CMD_WRITE_REGISTER,
               RADIOLIB_SX126X_REG_SYNC_WORD_0 >> 8 & 0xff, RADIOLIB_SX126X_REG_SYNC_WORD_0  & 0xff,
-              0x54, 0x76, 0x96, 0x00, 0x00, 0x00
+//              0x54, 0x76, 0x96, 0x00, 0x00, 0x00
+              0x34, 0x76, 0x96, 0x00, 0x00, 0x00
             };
 
             return(sx126xcommand(data, this->rx_buffer, 9));

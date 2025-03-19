@@ -109,7 +109,7 @@ namespace esphome {
 
               this->led_blink();
 
-              if(irq & ADIOLIB_SX126X_IRQ_RX_DONE) {
+              if(irq & RADIOLIB_SX126X_IRQ_RX_DONE) {
                   uint8_t cmd[] = { 0x1e, 0x00, 0x00, 
                                     0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 }; 
                   sx126xcommand(cmd, this->rx_buffer, 13);

@@ -56,7 +56,7 @@ namespace esphome {
             //state = setCalibration(RADIOLIB_SX126X_CALIBRATE_ALL);
 
             // bitrate, freqDeviation, Bandwidth, PulseShape
-            state = setModulationParams(19.2f, 50.0f, 156.2f, RADIOLIB_SX126X_GFSK_FILTER_NONE);
+            state = setModulationParams(32.768f, 50.0f, 156.2f, RADIOLIB_SX126X_GFSK_FILTER_NONE);
 
             state = setPacketParams(16, 
                                     RADIOLIB_SX126X_GFSK_PREAMBLE_DETECT_8, 
@@ -87,60 +87,6 @@ namespace esphome {
 
             state = setRx(0xffffff);
             //state = setFs();
-
-
-/*
-            delay(3);
-            uint8_t cmd0[] = {0xC0, 0x00 };                      // GetStats
-            sx126xcommand(cmd0, this->rx_buffer, 2);
-            uint8_t cmd12[] = {0x1D, 0x06, 0xc0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 };      // Read syncword                // ReadRegister SyncWord
-            sx126xcommand(cmd12, this->rx_buffer, 12);
-            uint8_t cmd16[] = {0x0D, 0x06, 0xc0, 0x54, 0x76, 0x96, 0x00, 0x00, 0x00, 0x00, 0x00 };      // Write syncword
-            sx126xcommand(cmd16, this->rx_buffer, 11);
-            sx126xcommand(cmd12, this->rx_buffer, 12);
-            uint8_t cmd13[] = {0x9D, 0x01 };                      // SetDio2AsRfSwitchCtrl, enable
-            sx126xcommand(cmd13, this->rx_buffer, 2);
-            uint8_t cmd15[] = {0x8F, 0x00, 0x00 };                      // SetBufferBaseAddress
-            sx126xcommand(cmd15, this->rx_buffer, 3);
-            uint8_t cmd9[] = {0x80, 0x00};                       // SetStandby, STDBY_RC = 0x00 STDBY_XOSC = 0x01
-            sx126xcommand(cmd9, this->rx_buffer, 2);
-            delay(3);
-            uint32_t freq = uint32_t ((868.0f * (1 << 25)) / 32.0f);
-            uint8_t cmd10[] = {0x86, uint8_t (freq >> 24 & 0xff), 
-                                     uint8_t (freq >> 16 & 0xff),
-                                     uint8_t (freq >> 8 & 0xff),
-                                     uint8_t (freq & 0xff) };         // Set RF requency
-            sx126xcommand(cmd10, this->rx_buffer, 5);
-            uint8_t cmd1[] = {0x8A, 0x00};                       // Set packet type with protocol GFSK
-            sx126xcommand(cmd1, this->rx_buffer, 2);
-            uint8_t cmd2[] = {0x93, 0x20};                       // SetRxTxFallbackMode,  The radio goes into STDBY_RC mode after Tx or Rx
-            sx126xcommand(cmd2, this->rx_buffer, 2);
-            uint8_t cmd3[] = {0x88, 0x03, 0x16, 0x0A, 0x00, 0x00, 0x00, 0x00};   // SetCadParams
-            //sx126xcommand(cmd3, this->rx_buffer, 8);
-            uint8_t cmd11[] = {0x98, 0xD7, 0xDB };                // Calibrate image
-            //sx126xcommand(cmd11, this->rx_buffer, 3);
-            delay(3);
-            uint8_t cmd4[] = {0x89, 0b01111111};                  // Calibrate, All
-            //sx126xcommand(cmd4, this->rx_buffer, 2);
-            delay(3);
-            uint8_t cmd6[] = {0x8B, 0x00, 0x50, 0x00, 0x00, 0x1f, 0x00, 0x66, 0x66 };      // SetModulationParams, br = 50000, PulseShape = non, Bw = 156,2, FreqDev = 600
-            sx126xcommand(cmd6, this->rx_buffer, 9);
-            uint8_t cmd8[] = {0x8C, 0x00, 0x18, 0x00, 0x10, 0x00, 0x00, 0xFF, 0x01, 0x00}; // SetPacketParams, 
-            sx126xcommand(cmd8, this->rx_buffer, 10);
-            uint8_t cmd14[] = {0x96, 0x01 };                                    // SetRegulatorMode, 
-            sx126xcommand(cmd14, this->rx_buffer, 2);
-            uint8_t cmd17[] = {0x08, 0x03, 0xff, 0x03, 0xff, 0x00, 0x00, 0x00, 0x00 };                 // SetDioIrqParams
-            sx126xcommand(cmd17, this->rx_buffer, 9);
-            uint8_t cmd5[] = {0xC0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 };                        // GetStats
-            sx126xcommand(cmd5, this->rx_buffer, 2);
-            uint8_t cmd18[] = {0x80, 0x00};                       // SetStandby, STDBY_RC = 0x00 STDBY_XOSC = 0x01
-            sx126xcommand(cmd18, this->rx_buffer, 2);
-            uint8_t cmd7[] = {0x82, 0x00, 0x00, 0x00};                        // SetRX, no timeout
-            sx126xcommand(cmd7, this->rx_buffer, 4);
-            delay(3);
-            sx126xcommand(cmd5, this->rx_buffer, 2);
-            sx126xcommand(cmd5, this->rx_buffer, 2);
-*/
         }
 
         void Sx126XSpiComponent::loop() {

@@ -64,7 +64,7 @@ namespace esphome {
             state = setPacketParams(16, 
                                     RADIOLIB_SX126X_GFSK_PREAMBLE_DETECT_8, 
                                     //24, // Syncword length
-                                    8,
+                                    0,
                                     RADIOLIB_SX126X_GFSK_ADDRESS_FILT_OFF, 
                                     RADIOLIB_SX126X_GFSK_PACKET_VARIABLE, 
                                     0xf0,

@@ -116,6 +116,15 @@ namespace esphome {
                   uint8_t cmd[] = { 0x1e, (uint8_t) (rxBufferStatus & 0xff), 0x00, 
                                     0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 }; 
                   sx126xcommand(cmd, this->rx_buffer, 13);
+
+                  uint8_t string[200];
+                  for(uint32_t i = 0; i < ((rxBufferStatus >> 8) & 0xff); i++) {
+                    sprintf(string[i * 3], "%02x ", this->rx_buffer[i]);
+                  }
+                  string[i * 3] = '\0';
+
+                  ESP_LOGD(TAG, "Rx: %s", string);
+                  /*
                   ESP_LOGD(TAG, "status: %02X %02X %02X %02X %02X %02X %02X %02X %02X %02X", this->rx_buffer[3], 
                                                                     this->rx_buffer[4],
                                                                     this->rx_buffer[5],
@@ -127,6 +136,7 @@ namespace esphome {
                                                                     this->rx_buffer[11],
                                                                     this->rx_buffer[12]
                   );
+                  */
               }
 
               status = getStatus();

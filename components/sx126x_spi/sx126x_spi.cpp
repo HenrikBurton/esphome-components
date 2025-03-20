@@ -121,7 +121,7 @@ namespace esphome {
                   for(uint32_t i = 0; i < ((rxBufferStatus >> 8) & 0xff); i++) {
                     sprintf(string + i * 3, "%02x ", this->rx_buffer[i]);
                   }
-                  string[i * 3] = '\0';
+                  string[((rxBufferStatus >> 8) & 0xff) * 3] = '\0';
 
                   ESP_LOGD(TAG, "Rx: %s", string);
                   /*

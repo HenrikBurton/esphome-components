@@ -502,6 +502,7 @@ namespace esphome {
                 int16_t setPacketType(uint8_t);
                 int16_t setFallbackMode(uint8_t);
                 int16_t setCadParams();
+                uint16_t getRxBufferStatus();
                 int16_t clearIrqStatus(uint16_t);
                 uint16_t getIrqStatus();
                 int16_t setDioIrqParams(uint16_t, uint16_t, uint16_t, uint16_t);

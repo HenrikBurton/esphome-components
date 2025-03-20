@@ -110,6 +110,9 @@ namespace esphome {
               this->led_blink();
 
               if(irqStatus & RADIOLIB_SX126X_IRQ_RX_DONE) {
+                  uint16_t rxBufferStatus = getRxBufferStatus();
+                  ESP_LOGD(TAG, "Length and pointer: %04X", rxBufferStatus);
+                  
                   uint8_t cmd[] = { 0x1e, 0x00, 0x00, 
                                     0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 }; 
                   sx126xcommand(cmd, this->rx_buffer, 13);
@@ -246,6 +249,12 @@ namespace esphome {
           int16_t Sx126XSpiComponent::setBufferBaseAddress(uint8_t txBaseAddress, uint8_t rxBaseAddress) {
             uint8_t data[] = { RADIOLIB_SX126X_CMD_SET_BUFFER_BASE_ADDRESS, txBaseAddress, rxBaseAddress };
             return(sx126xcommand(data, this->rx_buffer, 3));
+          }
+
+          uint16_t Sx126XSpiComponent::getRxBufferStatus() {
+            uint8_t data[] = { RADIOLIB_SX126X_CMD_GET_RX_BUFFER_STATUS, 0x00, 0x00, 0x00 };
+            uint16_t status = sx126xcommand(data, this->rx_buffer, 4);
+            return((uint16_t)(this->rx_buffer[2] << 8) | this->rx_buffer[3]);
           }
 
           int16_t Sx126XSpiComponent::setPacketType(uint8_t type) {

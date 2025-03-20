@@ -119,7 +119,7 @@ namespace esphome {
 
                   uint8_t string[200];
                   for(uint32_t i = 0; i < ((rxBufferStatus >> 8) & 0xff); i++) {
-                    sprintf(string[i * 3], "%02x ", this->rx_buffer[i]);
+                    sprintf(string + i * 3, "%02x ", this->rx_buffer[i]);
                   }
                   string[i * 3] = '\0';
 

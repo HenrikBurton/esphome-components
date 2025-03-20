@@ -496,6 +496,7 @@ namespace esphome {
                 int16_t sx126xcommand(uint8_t*, uint8_t*, uint32_t);
                 int16_t standby(uint8_t);
                 int16_t setRfFrequency(float);
+                uint16_t getStatus();
                 int16_t setRx(uint32_t);
                 int16_t setFs();
                 int16_t setBufferBaseAddress(uint8_t, uint8_t);

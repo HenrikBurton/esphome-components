@@ -54,8 +54,6 @@ namespace esphome {
 
             state = setBufferBaseAddress(0x00, 0x00);
 
-            //state = setFallbackMode(RADIOLIB_SX126X_RX_TX_FALLBACK_MODE_STDBY_RC);
-
             //state = setCadParams();
 
             //state = setCalibration(RADIOLIB_SX126X_CALIBRATE_ALL);
@@ -81,6 +79,8 @@ namespace esphome {
 
             state = setDIO3AsTCXOCtrl(RADIOLIB_SX126X_DIO3_OUTPUT_3_0, 64);  // Delay = 1 ms / 0.015625 ms = 64
 
+            state = setFallbackMode(RADIOLIB_SX126X_RX_TX_FALLBACK_MODE_STDBY_XOSC);
+
             //state = setRegulatorMode(RADIOLIB_SX126X_REGULATOR_LDO); // RADIOLIB_SX126X_REGULATOR_DC_DC
            
             //state = setCurrentLimit(60.0);
@@ -91,7 +91,7 @@ namespace esphome {
 
             state = standby(RADIOLIB_SX126X_STANDBY_XOSC);
 
-            state = setRx(0xffffff);
+            state = setRx(0x000000);
             //state = setFs();
         }
 
@@ -127,7 +127,14 @@ namespace esphome {
                                                                     this->rx_buffer[11],
                                                                     this->rx_buffer[12]
                   );
-              } 
+              }
+
+              status = getStatus();
+              ESP_LOGD(TAG, "Status: %02X", status);
+
+              if((status & 0x70) != RADIOLIB_SX126X_STATUS_MODE_RX) {
+                status = setRx(0x000000);
+              }
 
             }
 /*
@@ -212,6 +219,12 @@ namespace esphome {
             this->delegate_->transfer(command, response, length);
             this->delegate_->end_transaction();
             return(0);
+          }
+           
+          uint16_t Sx126XSpiComponent::getStatus() {
+            uint8_t data[] = { RADIOLIB_SX126X_CMD_GET_STATUS, 0x00 };
+            uint16_t status = sx126xcommand(data, this->rx_buffer, 2);
+            return((uint16_t)this->rx_buffer[1]);
           }
 
           int16_t Sx126XSpiComponent::standby(uint8_t mode) {

@@ -63,7 +63,7 @@ namespace esphome {
             // bitrate, freqDeviation, Bandwidth, PulseShape
             state = setModulationParams(32.768f, 50.0f, 156.2f, RADIOLIB_SX126X_GFSK_FILTER_NONE);
 
-            state = setPacketParams(8, // 16, 
+            state = setPacketParams(16, 
                                     RADIOLIB_SX126X_GFSK_PREAMBLE_DETECT_8, 
                                     //24, // Syncword length
                                     24,

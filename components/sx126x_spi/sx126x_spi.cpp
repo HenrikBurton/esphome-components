@@ -117,7 +117,7 @@ namespace esphome {
                                     0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 }; 
                   sx126xcommand(cmd, this->rx_buffer, 13);
 
-                  char string[200];
+                  char string[1000];
                   for(uint32_t i = 0; i < ((rxBufferStatus >> 8) & 0xff); i++) {
                     sprintf(string + i * 3, "%02x ", this->rx_buffer[i]);
                   }

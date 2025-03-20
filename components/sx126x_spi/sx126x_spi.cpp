@@ -64,7 +64,7 @@ namespace esphome {
             state = setPacketParams(16, 
                                     RADIOLIB_SX126X_GFSK_PREAMBLE_DETECT_8, 
                                     //24, // Syncword length
-                                    16,
+                                    24,
                                     RADIOLIB_SX126X_GFSK_ADDRESS_FILT_OFF, 
                                     RADIOLIB_SX126X_GFSK_PACKET_VARIABLE, 
                                     0xf0,
@@ -103,7 +103,7 @@ namespace esphome {
             if(irq) {
               uint16_t irqStatus = getIrqStatus();
 
-              ESP_LOGD(TAG, "IRQ: %04X", irqStatus);
+              //ESP_LOGD(TAG, "IRQ: %04X", irqStatus);
 
               uint16_t status = clearIrqStatus(RADIOLIB_SX126X_IRQ_ALL);
 
@@ -140,7 +140,7 @@ namespace esphome {
               }
 
               status = getStatus();
-              ESP_LOGD(TAG, "Status: %02X", status);
+              //ESP_LOGD(TAG, "Status: %02X", status);
 
               if((status & 0x70) != RADIOLIB_SX126X_STATUS_MODE_RX) {
                 status = setRx(0x000000);

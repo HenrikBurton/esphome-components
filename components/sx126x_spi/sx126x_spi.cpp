@@ -123,7 +123,7 @@ namespace esphome {
 
                   char string[1000];
                   for(uint32_t i = 0; i < packetlength; i++) {
-                    sprintf(string + i * 3, "%02x ", this->rx_buffer[3 + i]);
+                    sprintf(string + i * 3, "%02x ", this->rx_buffer[0 + i]);
                   }
                   string[packetlength * 3] = '\0';
 

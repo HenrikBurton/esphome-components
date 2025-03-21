@@ -449,7 +449,7 @@ namespace esphome {
               RADIOLIB_SX126X_CMD_WRITE_REGISTER,
               RADIOLIB_SX126X_REG_SYNC_WORD_0 >> 8 & 0xff, RADIOLIB_SX126X_REG_SYNC_WORD_0  & 0xff,
 //              0x54, 0x76, 0x96, 0x00, 0x00, 0x00
-              0x54, 0xcd, 0x00, 0x00, 0x00, 0x00 // mode C lock A
+              0x54, 0x3d, 0x00, 0x00, 0x00, 0x00 // mode C lock A
             };
 
             return(sx126xcommand(data, this->rx_buffer, 9));

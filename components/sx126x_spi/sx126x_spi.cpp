@@ -111,19 +111,21 @@ namespace esphome {
 
               if(irqStatus & RADIOLIB_SX126X_IRQ_RX_DONE) {
                   uint16_t rxBufferStatus = getRxBufferStatus();
-                  ESP_LOGD(TAG, "Length and pointer: %04X", rxBufferStatus);
+                  uint32_t packetlength = ((rxBufferStatus >> 8) & 0xff);
+                  uint32_t packetpointer = rxBufferStatus & 0xff;
+                  ESP_LOGD(TAG, "Length: %d pointer: %d", packetlength, packetpointer);
 
                   //uint8_t cmd[] = { 0x1e, (uint8_t) (rxBufferStatus & 0xff), 0x00, 
                   //                  0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 }; 
                   this->rx_buffer[0] = 0x1e; 
-                  this->rx_buffer[1] = uint8_t (rxBufferStatus & 0xff);
-                  sx126xcommand(this->rx_buffer, this->rx_buffer, ((rxBufferStatus >> 8) & 0xff));
+                  this->rx_buffer[1] = uint8_t packetlength;
+                  sx126xcommand(this->rx_buffer, this->rx_buffer, packetlength);
 
                   char string[1000];
-                  for(uint32_t i = 0; i < ((rxBufferStatus >> 8) & 0xff); i++) {
+                  for(uint32_t i = 0; i < packetlength; i++) {
                     sprintf(string + i * 3, "%02x ", this->rx_buffer[3 + i]);
                   }
-                  string[((rxBufferStatus >> 8) & 0xff) * 3] = '\0';
+                  string[packetlength * 3] = '\0';
 
                   ESP_LOGD(TAG, "Rx: %s", string);
                   /*

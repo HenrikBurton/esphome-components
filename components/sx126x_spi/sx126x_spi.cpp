@@ -114,8 +114,8 @@ namespace esphome {
                   ESP_LOGD(TAG, "Length and pointer: %04X", rxBufferStatus);
 
                   uint8_t cmd[] = { 0x1e, (uint8_t) (rxBufferStatus & 0xff), 0x00, 
-                                    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 }; 
-                  sx126xcommand(cmd, this->rx_buffer, 13);
+                                    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 }; 
+                  sx126xcommand(cmd, this->rx_buffer, 18);
 
                   char string[1000];
                   for(uint32_t i = 0; i < ((rxBufferStatus >> 8) & 0xff); i++) {

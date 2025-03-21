@@ -118,7 +118,7 @@ namespace esphome {
                   //uint8_t cmd[] = { 0x1e, (uint8_t) (rxBufferStatus & 0xff), 0x00, 
                   //                  0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 }; 
                   this->rx_buffer[0] = 0x1e; 
-                  this->rx_buffer[1] = uint8_t packetlength;
+                  this->rx_buffer[1] = packetlength;
                   sx126xcommand(this->rx_buffer, this->rx_buffer, packetlength);
 
                   char string[1000];

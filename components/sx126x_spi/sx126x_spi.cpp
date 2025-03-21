@@ -115,7 +115,8 @@ namespace esphome {
 
                   //uint8_t cmd[] = { 0x1e, (uint8_t) (rxBufferStatus & 0xff), 0x00, 
                   //                  0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 }; 
-                  this->rx_buffer[] = {0x1e, (uint8_t) (rxBufferStatus & 0xff) };
+                  this->rx_buffer[0] = 0x1e; 
+                  this->rx_buffer[1] = uint8_t (rxBufferStatus & 0xff);
                   sx126xcommand(this->rx_buffer, this->rx_buffer, ((rxBufferStatus >> 8) & 0xff));
 
                   char string[1000];
